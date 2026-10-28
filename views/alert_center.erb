@@ -1,7 +1,7 @@
 <h1>Manage Your Alert Groups</h1>
 
 <% if SS_ID == 1 %>
-    <%= erb :'innovationstudio/alert_center', :locals => {
+    <%== erb :'innovationstudio/alert_center', :locals => {
         :generalAlerts => generalAlerts,
         :woodShopAlerts => woodShopAlerts,
         :metalShopAlerts => metalShopAlerts,
@@ -10,7 +10,7 @@
         :alert_ids => alert_ids
     } %>
 <% elsif SS_ID == 8 %>
-    <%= erb :'engineering_design_hub/alert_center', :locals => {
+    <%== erb :'engineering_design_hub/alert_center', :locals => {
         :generalAlerts => generalAlerts,
         :woodShopAlerts => woodShopAlerts,
         :metalShopAlerts => metalShopAlerts,

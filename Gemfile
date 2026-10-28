@@ -18,6 +18,7 @@ gem 'rufus-scheduler'
 gem 'highlander'
 gem 'gnuplot'
 gem 'rack-cas', git: 'https://github.com/unl/rack-cas.git', branch: 'master'
+gem 'erubi'
 
 group :development do
   gem 'shotgun'

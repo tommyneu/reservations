@@ -4,13 +4,13 @@
 <h1 class="dcf-txt-h3">Upcoming Workshops</h1>
 
 <% if SS_ID == 1 %>
-    <%= erb :'innovationstudio/workshops', :locals => {
+    <%==  erb :'innovationstudio/workshops', :locals => {
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,
 		:events_general => events_general
 	} %>
 <% elsif SS_ID == 8 %>
-    <%= erb :'engineering_design_hub/workshops', :locals => {
+    <%==  erb :'engineering_design_hub/workshops', :locals => {
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,
 		:events_general => events_general

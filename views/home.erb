@@ -2,7 +2,7 @@
 
 <h5>Hello, <%= @user.full_name %> (<%= @user.username %>)</h5>
 <% if SS_ID == 1 %>
-  <%= erb :'innovationstudio/membership_expiration' %>
+  <%==  erb :'innovationstudio/membership_expiration' %>
 <% end %>
 
 
@@ -121,11 +121,11 @@
 </p>
 
 <% if SS_ID == 1 %>
-  <%= erb :'innovationstudio/my_alerts', :locals => {
+  <%==  erb :'innovationstudio/my_alerts', :locals => {
     :user_alerts => user_alerts
   } %>
 <% elsif SS_ID == 8 %>
-  <%= erb :'engineering_design_hub/my_alerts', :locals => {
+  <%==  erb :'engineering_design_hub/my_alerts', :locals => {
     :user_alerts => user_alerts
   } %>
 <% end %>

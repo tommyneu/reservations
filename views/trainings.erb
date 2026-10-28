@@ -3,14 +3,14 @@
 
 
 <% if SS_ID == 1 %>
-    <%= erb :'innovationstudio/trainings', :locals => {
+    <%==  erb :'innovationstudio/trainings', :locals => {
 		:events => events,
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,
 		:events_general => events_general
     } %>
 <% elsif SS_ID == 8 %>
-    <%= erb :'engineering_design_hub/trainings', :locals => {
+    <%==  erb :'engineering_design_hub/trainings', :locals => {
 		:events => events,
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,

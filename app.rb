@@ -16,6 +16,8 @@ use Rack::CAS, server_url: 'https://shib.unl.edu/idp/profile/cas'
 
 Time.zone = "America/Chicago"
 
+set :erb, escape_html: true
+
 # this gives the user messages
 def flash(type, header, message)
   session["notice"] ||= []
@@ -38,7 +40,7 @@ before do
       {
         :href => 'https://www.unl.edu/',
         :text => 'Nebraska',
-        :title => 'University of Nebraska&ndash;Lincoln Home'
+        :title => 'University of Nebraska–Lincoln Home'
       },
       {
         :href => 'https://innovationstudio.unl.edu/',

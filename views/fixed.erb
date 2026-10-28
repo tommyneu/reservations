@@ -2,7 +2,7 @@
 <% template_dep_version = Time.now.strftime("%F")  %>
 <html class="dcf-no-js dcf-no-webp" lang="en">
   <head>
-    <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/head-1.html"), encoding: 'UTF-8')).result %>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/head-1.html"), encoding: 'UTF-8')).result %>
     <!--
       Membership and regular participation in the University of Nebraska–Lincoln (UNL) Web Developer Network (WDN) is required to use the UNLedu Web Framework. Visit the WDN site at https://wdn.unl.edu/. Register for our mailing list and add your site or server to UNL Web Audit.
       All framework code is the property of the UNL Web Developer Network. The code seen in a source code view is not, and may not be used as, a template. You may not use this code, a reverse-engineered version of this code, or its associated visual presentation in whole or in part to create a derivative work.
@@ -13,7 +13,7 @@
     <!-- TemplateBeginEditable name="doctitle" -->
     <title><%= CONFIG['app']['title'] %> | University of Nebraska&ndash;Lincoln</title>
     <!-- TemplateEndEditable -->
-    <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/head-2-local.html"), encoding: 'UTF-8')).result.gsub('$DEP_VERSION$', template_dep_version) %>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/head-2-local.html"), encoding: 'UTF-8')).result.gsub('$DEP_VERSION$', template_dep_version) %>
     <!-- TemplateBeginEditable name="head" -->
     <!-- Place optional header elements here -->
     <link rel="stylesheet" href="/css/main.css?cb=<%= CONFIG['app']['cb_version'] %>">
@@ -22,63 +22,63 @@
     <!-- TemplateParam name="class" type="text" value="" -->
   </head>
   <body class="unl" data-version="5.3">
-    <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/skip-nav.html"), encoding: 'UTF-8')).result %>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/skip-nav.html"), encoding: 'UTF-8')).result %>
     <header class="dcf-header" id="dcf-header" role="banner">
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/header-global-1.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-header-1.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-header-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/header-global-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-header-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-header-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="headervisit" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-header-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-header-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-header-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-header-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="headerapply" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-header-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-header-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-header-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-header-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="headergive" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-header-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-header-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-header-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-header-2.html"), encoding: 'UTF-8')).result %>
       <% if SS_ID == 8 %>
-        <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/idm.html"), encoding: 'UTF-8')).result %>
+        <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/idm.html"), encoding: 'UTF-8')).result %>
       <% end %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/search.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/header-global-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/logo-lockup-1.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-affiliation-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/search.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/header-global-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/logo-lockup-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-affiliation-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="affiliation" -->
       <a href="<%= @affiliation_link %>"><%= @affiliation %></a>
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-affiliation-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-title-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-affiliation-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-title-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="titlegraphic" -->
       <a class="dcf-txt-h5" href="/"><%= CONFIG['app']['title'] %></a>
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-title-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/logo-lockup-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/html_patches/patched-nav-toggle-group.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-1.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-toggle-btn.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-child-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/site-title-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/logo-lockup-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/html_patches/patched-nav-toggle-group.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-toggle-btn.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-child-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="navlinks" -->
-      <%= erb :'navigation' %>
+      <%==  erb :'navigation' %>
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-nav-1.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-nav-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-nav-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-nav-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="navvisit" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-nav-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-nav-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/visit-nav-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-nav-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="navapply" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-nav-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-nav-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/apply-nav-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-nav-1.html"), encoding: 'UTF-8')).result %>
       <!-- InstanceBeginEditable name="navgive" -->
       <!-- InstanceEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-nav-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-nav-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-child-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/give-nav-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/cta-nav-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-child-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/nav-menu-2.html"), encoding: 'UTF-8')).result %>
     </header>
 
     <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
@@ -132,9 +132,9 @@
                                 notice_class = 'dcf-notice-warning' %>
                         <% end %>
                         <div id="notice" class="dcf-notice <%= notice_class %>" hidden>
-                            <h2><%= notice[:header] %></h2>
+                            <h2><%== notice[:header] %></h2>
                             <div class="message-content">
-                                    <%= notice[:message] %>
+                                    <%== notice[:message] %>
                             </div>
                         </div>
                         <% end %>
@@ -142,7 +142,7 @@
                     <% session.delete(:notice) %>
                     <% session.delete("notice") %>
                     <% end %>
-                    <%= yield %>
+                    <%== yield %>
                 </div>
             </div>
             <!-- TemplateEndEditable -->
@@ -152,15 +152,15 @@
     <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
       <!-- TemplateBeginEditable name="optionalfooter" -->
       <!-- TemplateEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/footer-global-1.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/footer-global-1.html"), encoding: 'UTF-8')).result %>
       <!-- TemplateBeginEditable name="contactinfo" -->
-      <%= erb :'local_footer' %>
+      <%==  erb :'local_footer' %>
       <!-- TemplateEndEditable -->
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/footer-global-2.html"), encoding: 'UTF-8')).result %>
-      <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/noscript.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/footer-global-2.html"), encoding: 'UTF-8')).result %>
+      <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/noscript.html"), encoding: 'UTF-8')).result %>
     </footer>
 
-    <%= ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/js-body-local.html"), encoding: 'UTF-8')).result.gsub('$DEP_VERSION$', template_dep_version) %>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_5.3/includes/global/js-body-local.html"), encoding: 'UTF-8')).result.gsub('$DEP_VERSION$', template_dep_version) %>
     <!-- TemplateBeginEditable name="jsbody" -->
     <!-- put your custom javascript here -->
     <script type="text/javascript">WDN.initializePlugin("notice");</script>
@@ -208,7 +208,7 @@
         }, false);
       </script>
     <% end %>
-    <%= @inline_body_script_content %>
+    <%== @inline_body_script_content %>
     <!-- TemplateEndEditable -->
   </body>
 </html>
