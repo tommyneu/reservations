@@ -2,7 +2,7 @@ get '/training-documents/?' do
 	not_found if SS_ID != 1
 
 	@breadcrumbs << {:text => 'Training Documents'}
-	erb :training_documents, :layout => :fixed
+	erb :training_documents, :layout => :fixed_61
 end
 
 

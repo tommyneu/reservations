@@ -97,7 +97,7 @@ get '/status_page/?' do
       end
     end
 
-	erb :'/engineering_design_hub/status_page', :layout => :fixed, :locals => {
+	erb :'/engineering_design_hub/status_page', :layout => :fixed_61, :locals => {
         :lockout_count => lockout_count,
         :lockouts => lockouts,
         :orientation_potentials => orientation_potentials,

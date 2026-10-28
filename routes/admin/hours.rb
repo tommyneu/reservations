@@ -42,7 +42,7 @@ get '/admin/hours/?' do
 		.where('effective_date <= ?', (date+365.days).utc.strftime('%Y-%m-%d %H:%M:%S'))
 		.order(:effective_date).all
 
-	erb :'admin/hours', :layout => :fixed, :locals => {
+	erb :'admin/hours', :layout => :fixed_61, :locals => {
 		:weeks_hours => week_hours,
 		:upcoming_hours => upcoming_hours,
 		:sunday => sunday,
@@ -52,7 +52,7 @@ end
 
 get '/admin/hours/create/?' do
 	# show a form for setting a weekly schedule for a day or a one-off
-	erb :'admin/new_hours', :layout => :fixed, :locals => {
+	erb :'admin/new_hours', :layout => :fixed_61, :locals => {
 		:space_hour => SpaceHour.new,
 		:hours => session.delete(:hours)
 	}
@@ -66,7 +66,7 @@ get '/admin/hours/:hour_id/edit/?' do
 	end
 
 	# show form for editing
-	erb :'admin/new_hours', :layout => :fixed, :locals => {
+	erb :'admin/new_hours', :layout => :fixed_61, :locals => {
 		:space_hour => session.delete(:space_hour) || space_hour,
 		:hours => session.delete(:hours) || space_hour.hours
 	}

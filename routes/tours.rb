@@ -8,7 +8,7 @@ get '/tours/?' do
 	@breadcrumbs << {:text => 'Tours'}
 	tour_id = EventType.find_by(:description => 'Tour', :service_space_id => SS_ID).id
 
-    erb :tours, :layout => :fixed, :locals => {
+    erb :tours, :layout => :fixed_61, :locals => {
     	:events => Event.includes(:event_signups).where(:service_space_id => SS_ID, :event_type_id => tour_id).where('start_time >= ?', Time.now).all
     }
 end
@@ -31,7 +31,7 @@ get '/tours/sign_up/:event_id/?' do
     redirect '/tours/'
 	end
 
-	erb :tour_signup, :layout => :fixed, :locals => {
+	erb :tour_signup, :layout => :fixed_61, :locals => {
 		:event => event
 	}
 end

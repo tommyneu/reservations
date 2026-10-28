@@ -14,14 +14,14 @@ end
 
 get '/admin/email/?' do
 	@breadcrumbs << {:text => 'Admin Emails'}
-	erb :'admin/emails', :layout => :fixed
+	erb :'admin/emails', :layout => :fixed_61
 end
 
 get '/admin/email/expiration_email/?' do
 
 	reminder = ExpirationReminder.first
 
-	erb :'admin/manage_expiration_email', :layout => :fixed, :locals => {
+	erb :'admin/manage_expiration_email', :layout => :fixed_61, :locals => {
 		:get_first_reminder => reminder.first_reminder,
 		:get_second_reminder => reminder.second_reminder,
 	}
@@ -58,7 +58,7 @@ post '/admin/email/expiration_email/?' do
 
 	flash :success, 'Success', 'Your preferences have been updated!'
 
-	erb :'admin/manage_expiration_email', :layout => :fixed, :locals => {
+	erb :'admin/manage_expiration_email', :layout => :fixed_61, :locals => {
 		:get_first_reminder => reminder.first_reminder,
 		:get_second_reminder => reminder.second_reminder,
 	}
@@ -73,7 +73,7 @@ get '/admin/email/send/?' do
 	alerts = Alert.order(:name).all
 	preset_emails = PresetEmail.where(:service_space_id => SS_ID).all
 	
-	erb :'admin/send_email', :layout => :fixed, :locals => {
+	erb :'admin/send_email', :layout => :fixed_61, :locals => {
 		:users => users,
 		:tools => tools,
 		:alerts => alerts,
@@ -214,7 +214,7 @@ get '/admin/email/presets/?' do
 	@breadcrumbs << {:text => 'Admin Emails', :href => '/admin/email/'} << {:text => 'Manage Preset Emails'}
 	preset_emails = PresetEmail.where(:service_space_id => SS_ID).all
 
-	erb :'admin/email_presets', :layout => :fixed, :locals => {
+	erb :'admin/email_presets', :layout => :fixed_61, :locals => {
 		:preset_emails => preset_emails
 	}
 end
@@ -222,7 +222,7 @@ end
 get '/admin/email/presets/create/?' do
 	@breadcrumbs << {:text => 'Admin Emails', :href => '/admin/email/'} << {:text => 'Manage Preset Emails', :href => '/admin/email/presets/'} << {:text => 'Create Preset Email'}
 
-	erb :'admin/new_preset_email', :layout => :fixed, :locals => {
+	erb :'admin/new_preset_email', :layout => :fixed_61, :locals => {
 		:preset_email => PresetEmail.where(:service_space_id => SS_ID).new
 	}
 end
@@ -261,7 +261,7 @@ get '/admin/email/presets/:preset_id/edit/?' do
 		redirect '/admin/email/presets'
 	end
 	
-	erb :'admin/new_preset_email', :layout => :fixed, :locals => {
+	erb :'admin/new_preset_email', :layout => :fixed_61, :locals => {
 		:preset_email => preset
 	}
 end

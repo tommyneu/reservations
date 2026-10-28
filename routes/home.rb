@@ -40,7 +40,7 @@ get '/home/?' do
 		flash(:info, Announcements.first.header, Announcements.first.text)
 	end
 
-	erb :home, :layout => :fixed, :locals => {
+	erb :home, :layout => :fixed_61, :locals => {
 		:reservations => reservations,
 		:events => user_events,
 		:trainer_events => trainer_events,

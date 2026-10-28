@@ -20,7 +20,7 @@ get '/new_members/?' do
   new_member_orientation_id = EventType.find_by(:description => 'New Member Orientation',
                                                 :service_space_id => SS_ID).id
 
-  erb :new_members, :layout => :fixed, :locals => {
+  erb :new_members, :layout => :fixed_61, :locals => {
     :events => Event.includes(:event_signups).where(:service_space_id => SS_ID, :event_type_id => new_member_orientation_id, :is_private => 0).where('start_time >= ?', Time.now).order(:start_time => :asc).all
   }
 end
@@ -40,7 +40,7 @@ get '/hrc/?' do
 
   combined_events = (hrc_events + hrc_feed_events).sort_by(&:start_time)
 
-  erb :new_members_hrc, :layout => :fixed, :locals => {
+  erb :new_members_hrc, :layout => :fixed_61, :locals => {
     :events => combined_events,
     :hrc_training_id => hrc_training_id
   }
@@ -79,13 +79,13 @@ get '/new_members/sign_up/:event_id/?' do
   end
 
   if event.event_type_id == hrc_training_id
-    erb :new_member_signup_hrc, :layout => :fixed, :locals => {
+    erb :new_member_signup_hrc, :layout => :fixed_61, :locals => {
       :event => event,
       :recaptcha => Recaptcha.recaptcha_tags,
       :form_data => session.delete(:form_data)
     }
   else
-    erb :new_member_signup, :layout => :fixed, :locals => {
+    erb :new_member_signup, :layout => :fixed_61, :locals => {
       :event => event,
       :recaptcha => Recaptcha.recaptcha_tags,
       :form_data => session.delete(:form_data)
@@ -412,7 +412,7 @@ end
 get '/engineering_design_hub/new_users/?' do
 	@breadcrumbs << { :text => "New Users" }
 
-  erb :'/engineering_design_hub/new_users', :layout => :fixed
+  erb :'/engineering_design_hub/new_users', :layout => :fixed_61
 end
 
 def fetch_final_content(uri)

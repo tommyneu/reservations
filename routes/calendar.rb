@@ -29,7 +29,7 @@ get '/calendar/?' do
 		end
 	end
 
-	erb :calendar, :layout => :fixed, :locals => {
+	erb :calendar, :layout => :fixed_61, :locals => {
 		:date => date,
 		:sunday => sunday,
 		:events => events,

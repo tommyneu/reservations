@@ -17,7 +17,7 @@ end %>
 <h1 class="dcf-txt-h3"><%= reservation.nil? ? 'Reserve Time on ' : 'Edit Reservation for ' %><%= tool.name %></h1>
 
 <form class="dcf-form" action="" method="POST">
-<section class="dcf-grid-full dcf-grid-thirds@sm dcf-col-gap-vw">
+<section class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-3@sm dcf-col-gap-vw">
     <div class="dcf-datepicker">
         <label for="date">Date</label>
         <input class="dcf-w-100%" id="date" name="date" title="Reservation Date" type="text" value="<%= day.strftime('%m/%d/%Y') %>" />

@@ -35,7 +35,7 @@ get '/tools/?' do
 	end
 	
 
-	erb :tools, :layout => :fixed, :locals => {
+	erb :tools, :layout => :fixed_61, :locals => {
 		:workshop_category => workshop_category,
 		:available_tools => tools
 	}
@@ -70,7 +70,7 @@ get '/tools/trainings/?' do
 	end
 
 
-	erb :trainings, :layout => :fixed, :locals => {
+	erb :trainings, :layout => :fixed_61, :locals => {
 		:events => events,
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,
@@ -257,7 +257,7 @@ get '/tools/:resource_id/reserve/?' do
 			lockouts = []
 		end
 
-	erb :reserve, :layout => :fixed, :locals => {
+	erb :reserve, :layout => :fixed_61, :locals => {
 		:tool => tool,
 		:reservations => reservations,
 		:lockouts => lockouts,
@@ -396,7 +396,7 @@ get '/tools/:resource_id/edit_reservation/:reservation_id/?' do
 			lockouts = []
 		end
 
-	erb :reserve, :layout => :fixed, :locals => {
+	erb :reserve, :layout => :fixed_61, :locals => {
 		:tool => tool,
 		:reservations => reservations,
 		:available_start_times => available_start_times,

@@ -70,7 +70,7 @@ get '/admin/events/?' do
 		)
 	end
 	
-	erb :'admin/events', :layout => :fixed, :locals => {
+	erb :'admin/events', :layout => :fixed_61, :locals => {
 		:events => iterator.order(order_clause).limit(page_size).offset((page-1)*page_size).all,
 		:total_pages => (iterator.count.to_f / page_size).ceil,
 		:page => page,
@@ -91,7 +91,7 @@ get '/admin/events/:event_id/signup_list/?' do
 		redirect '/admin/events/'
 	end
 
-	erb :'admin/signup_list', :layout => :fixed, :locals => {
+	erb :'admin/signup_list', :layout => :fixed_61, :locals => {
 		:event => event,
 		:event_type_id => event.event_type_id
 	}
@@ -276,7 +276,7 @@ get '/admin/events/create/?' do
 	
 	if params[:preset_id].nil? || Integer(params[:preset_id]) == 0
 		
-		erb :'admin/new_event', :layout => :fixed, :locals => {
+		erb :'admin/new_event', :layout => :fixed_61, :locals => {
 			:event => Event.new,
 			:mode => 'create',
 			:types => EventType.where(:service_space_id => SS_ID).all,
@@ -299,7 +299,7 @@ get '/admin/events/create/?' do
 		event.area = preset.area
 		event.max_signups = preset.max_signups
 		
-		erb :'admin/new_event', :layout => :fixed, :locals => {
+		erb :'admin/new_event', :layout => :fixed_61, :locals => {
 			:event => event,
 			:mode => 'create',
 			:types => EventType.where(:service_space_id => SS_ID).all,
@@ -527,7 +527,7 @@ get '/admin/events/:event_id/edit/?' do
 		]
 	end
 	if event.start_time != nil
-		erb :'admin/new_event', :layout => :fixed, :locals => {
+		erb :'admin/new_event', :layout => :fixed_61, :locals => {
 			:event => event,
 			:mode => 'edit',
 			:types => EventType.where(:service_space_id => SS_ID).all,
@@ -542,7 +542,7 @@ get '/admin/events/:event_id/edit/?' do
 			:hrc_training_id => hrc_training_id
 		}
 	else
-		erb :'admin/new_event', :layout => :fixed, :locals => {
+		erb :'admin/new_event', :layout => :fixed_61, :locals => {
 			:event => event,
 			:mode => 'edit',
 			:types => EventType.where(:service_space_id => SS_ID).all,
@@ -918,7 +918,7 @@ get '/admin/events/presets/?' do
 		event_types[type.id] = type.description
 	end
 	
-	erb :'admin/event_presets', :layout => :fixed, :locals => {
+	erb :'admin/event_presets', :layout => :fixed_61, :locals => {
 		:preset_events => preset_events,
 		:event_types => event_types
 	}
@@ -944,7 +944,7 @@ get '/admin/events/presets/create/?' do
 		]
 	end
 	
-	erb :'admin/new_preset_event', :layout => :fixed, :locals => {
+	erb :'admin/new_preset_event', :layout => :fixed_61, :locals => {
 		:preset_event => PresetEvents.new,
 		:event_types => event_types,
 		:reservable_tools => reservable_tools,
@@ -1042,7 +1042,7 @@ get '/admin/events/presets/:preset_id/edit/?' do
 		]
 	end
 	
-	erb :'admin/new_preset_event', :layout => :fixed, :locals => {
+	erb :'admin/new_preset_event', :layout => :fixed_61, :locals => {
 		:preset_event => preset,
 		:event_types => event_types,
 		:reservable_tools => reservable_tools,

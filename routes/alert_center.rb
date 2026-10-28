@@ -91,7 +91,7 @@ get '/alert_center/:user_id/?' do
         end
     end
 
-    erb :alert_center, :layout => :fixed, :locals => {
+    erb :alert_center, :layout => :fixed_61, :locals => {
         :generalAlerts => generalAlerts,
         :woodShopAlerts => woodShopAlerts,
         :metalShopAlerts => metalShopAlerts,

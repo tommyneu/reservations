@@ -12,7 +12,7 @@ get '/admin/material_prices/?' do
 	@breadcrumbs << {:text => 'Admin Material Prices'}
 
 	material_prices = Material_Price.where(:service_space_id => SS_ID).order(category: :asc, subcategory: :asc, name: :asc).all.to_a
-	erb :'admin/material_prices', :layout => :fixed, :locals => {
+	erb :'admin/material_prices', :layout => :fixed_61, :locals => {
 		:material_prices => material_prices
 	}
 end

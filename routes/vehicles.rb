@@ -8,7 +8,7 @@ get '/vehicle/add/?' do
         raise Sinatra::NotFound
     end
 
-  erb :new_vehicle, :layout => :fixed, :locals => {
+  erb :new_vehicle, :layout => :fixed_61, :locals => {
     :vehicle => Vehicle.new,
 	:user_id => params[:user_id]
   }
@@ -30,7 +30,7 @@ get '/vehicle/:vehicle_id/edit/?' do
 			redirect '/me/'
 		end
 	end
-    erb :new_vehicle, :layout => :fixed, :locals => {
+    erb :new_vehicle, :layout => :fixed_61, :locals => {
       :vehicle => vehicle,
 	  :user_id => params[:user_id]
     }

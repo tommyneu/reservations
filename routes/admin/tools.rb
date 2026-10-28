@@ -30,13 +30,13 @@ get '/admin/tools/?' do
 	checkable_tools = Tool.where(service_space_id: SS_ID)
 
 	if SS_ID == 8
-		erb :'admin/design_hub_tools', :layout => :fixed, :locals => {
+		erb :'admin/design_hub_tools', :layout => :fixed_61, :locals => {
 			:tools => tools,
 			:checkable_tools => checkable_tools,
 			:nuid => nuid
 		}	
 	else
-		erb :'admin/tools', :layout => :fixed, :locals => {
+		erb :'admin/tools', :layout => :fixed_61, :locals => {
 			:tools => tools,
 		}	
 	end
@@ -100,7 +100,7 @@ get '/admin/tools/create/?' do
 	require_login
 	@breadcrumbs << {:text => 'Admin Tools', :href => '/admin/tools/'} << {:text => 'Create Tool'}
 
-	erb :'admin/edit_tool', :layout => :fixed, :locals => {
+	erb :'admin/edit_tool', :layout => :fixed_61, :locals => {
 		:tool => Resource.new
 	}
 end
@@ -141,7 +141,7 @@ get '/admin/tools/create_checkable/?' do
 		raise Sinatra::NotFound
 	end
 
-	erb :'admin/edit_checkable_tool', :layout => :fixed, :locals => {
+	erb :'admin/edit_checkable_tool', :layout => :fixed_61, :locals => {
 		:tool => Tool.new
 	}
 end
@@ -172,7 +172,7 @@ get '/admin/tools/:resource_id/edit/?' do
 		redirect '/admin/tools/'
 	end
 
-	erb :'admin/edit_tool', :layout => :fixed, :locals => {
+	erb :'admin/edit_tool', :layout => :fixed_61, :locals => {
 		:tool => tool
 	}
 end
@@ -222,7 +222,7 @@ get '/admin/tools/:resource_id/edit_checkable/?' do
 		redirect '/admin/tools/'
 	end
 
-	erb :'admin/edit_checkable_tool', :layout => :fixed, :locals => {
+	erb :'admin/edit_checkable_tool', :layout => :fixed_61, :locals => {
 		:tool => tool
 	}
 end
@@ -279,7 +279,7 @@ get '/admin/tools/bulk_permissions_update/?' do
 	end
 
 
-	erb :'admin/bulk_permissions_update', :layout => :fixed, :locals => {
+	erb :'admin/bulk_permissions_update', :layout => :fixed_61, :locals => {
 		:new_tools => new_tools,
 		:tool_auth_copy => tool_auth_copy
 	}	

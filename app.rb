@@ -178,13 +178,13 @@ end
 
 not_found do
   @breadcrumbs << {:text => 'Not Found'}
-  erb 'That page was not found.', :layout => :fixed
+  erb 'That page was not found.', :layout => :fixed_61
 end
 
 error do
   @breadcrumbs << {:text => 'Error'}
   flash(:danger, 'Sorry! There was an error.', "We apologize. A really bad error occurred and it didn't work. We're fixing this as we speak.")
-  erb 'In the meantime, you can <a href="/">go back to the homepage</a>.', :layout => :fixed
+  erb 'In the meantime, you can <a href="/">go back to the homepage</a>.', :layout => :fixed_61
 end
 
 get '/' do

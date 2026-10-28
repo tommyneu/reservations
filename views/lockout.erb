@@ -3,22 +3,19 @@
 <p>Users should apply a LOTO whenever they believe a machine poses a safety risk or requires service. When a LOTO is applied, staff will be automatically notified and will inspect the machine during the next business day to assess the issue, perform necessary maintenance, and remove the LOTO once the equipment is safe to operate.</p>
 
 <form class="dcf-form dcf-mb-6" id="find-controls">
-    <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
-        <div class="dcf-col-100% dcf-col-100%-end@md">
-            <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw">
-                <div>
-                    <label for="workshop-category">Workshop Category:</label>
-                    <select id="workshop-category" style="width:auto;margin-top:10px;" tabindex="1" name="workshop_category" class="dcf-input-select">
-                    <option value="">All</option>
-                    <% Resource.category_options.each do |cat_id, name| %>
-                        <option <%= 'selected="selected"' if cat_id == workshop_category.to_i %> value="<%= cat_id %>"><%= name %></option>
-                    <% end %>
-                    </select>
-                </div>
-            </div>
-            <button id="search-btn" tabindex="1" class="dcf-btn dcf-btn-inverse-primary" style="margin-top:10px;">Search</button>
+    <fieldset class="dcf-w-fit-content">
+        <legend class="dcf-sr-only">Search Workshop Category</legend>
+        <div class="dcf-form-group">
+            <label for="workshop-category">Workshop Category:</label>
+            <select id="workshop-category" name="workshop_category" class="dcf-w-fit-content">
+                <option value="">All</option>
+                <% Resource.category_options.each do |cat_id, name| %>
+                    <option <%= 'selected="selected"' if cat_id == workshop_category.to_i %> value="<%= cat_id %>"><%= name %></option>
+                <% end %>
+            </select>
         </div>
-    </div>
+        <button class="dcf-btn dcf-btn-primary">Search</button>
+    </fieldset>
 </form>
 
 <% if tools.count > 0 %>

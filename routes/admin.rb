@@ -43,7 +43,7 @@ get '/admin/?' do
 		end
 	end
 
-	erb :'admin/home', :layout => :fixed, :locals => {
+	erb :'admin/home', :layout => :fixed_61, :locals => {
 		:user_count => user_count,
 		:upcoming_event_count => upcoming_event_count,
 		:tool_count => tool_count,

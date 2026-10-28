@@ -12,7 +12,7 @@ get '/admin/announcements/?' do
 	@breadcrumbs << {:text => 'Announcements'}
 	announcements = Announcements.first		# there should only be one announcement
 
-	erb :'admin/announcements', :layout => :fixed, :locals => {
+	erb :'admin/announcements', :layout => :fixed_61, :locals => {
 		:announcements => announcements
 	}
 end

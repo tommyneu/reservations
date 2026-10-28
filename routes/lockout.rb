@@ -20,7 +20,7 @@ get '/lockout/' do
         ]
     end
 
-    erb :'lockout', :layout => :fixed, :locals => {
+    erb :'lockout', :layout => :fixed_61, :locals => {
         :workshop_category => workshop_category,
         :tools => tools
     }
@@ -56,7 +56,7 @@ get '/lockout/:resource_id/create/?' do
 		lockout.started_on > Time.now
 	end.sort_by { |lockout| lockout.started_on }.reverse
 
-	erb :'lockout_resource', :layout => :fixed, :locals => {
+	erb :'lockout_resource', :layout => :fixed_61, :locals => {
 		:tool => tool,
 		:available_start_times => available_start_times,
 		:scheduled_lockouts => scheduled_lockouts
@@ -159,7 +159,7 @@ get '/lockout/:resource_id/edit/:lockout_id/?' do
 		fromHistory = true
 	end
 
-	erb :'edit_lockout', :layout => :fixed, :locals => {
+	erb :'edit_lockout', :layout => :fixed_61, :locals => {
 		:tool => tool,
 		:lockout => lockout,
 		:available_start_times => available_start_times,
@@ -250,7 +250,7 @@ get '/lockout/:resource_id/view/?' do
 		lockout.started_on < Time.now && !lockout.released_on.nil? && lockout.released_on < Time.now
 	end.sort_by { |lockout| lockout.released_on }.reverse
 
-	erb :'view_resource_lockout', :layout => :fixed, :locals => {
+	erb :'view_resource_lockout', :layout => :fixed_61, :locals => {
 		:tool => tool,
 		:active_lockouts => active_lockouts,
 		:scheduled_lockouts => scheduled_lockouts,

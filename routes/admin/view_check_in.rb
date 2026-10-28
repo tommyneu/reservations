@@ -65,7 +65,7 @@ get '/admin/view_check_in/?' do
 
     reasons = ['Training', 'Personal Project', 'Business Project', 'Class Project']
 
-    erb :'admin/view_check_in', :layout => :fixed, :locals => {
+    erb :'admin/view_check_in', :layout => :fixed_61, :locals => {
         :checkIns => checkIns,
         :counts => counts,
         :total => total,
@@ -84,7 +84,7 @@ end
 get '/admin/view_check_in/studio_spaces/?' do
     studios = StudioSpace.where(:service_space_id => SS_ID).all
     @breadcrumbs << {:text => 'Manage Studio Spaces'}
-    erb :'admin/manage_studio_spaces', :layout => :fixed, :locals => {
+    erb :'admin/manage_studio_spaces', :layout => :fixed_61, :locals => {
         :studios => studios
     }
 end 

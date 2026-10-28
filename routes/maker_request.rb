@@ -5,7 +5,7 @@ get '/maker_request/?' do
 
     @breadcrumbs << {:text => 'Create Maker Request'}
 
-    erb :maker_request, :layout => :fixed, :locals => {
+    erb :maker_request, :layout => :fixed_61, :locals => {
         maker_request: Maker_Request.new(),
         extras: {confirm_email: ''}
     }
@@ -17,7 +17,7 @@ get '/maker_request/how_to' do
     @breadcrumbs << {:text => 'How To'}
     require_login
 
-    erb :maker_request_how_to, :layout => :fixed, :locals => {}
+    erb :maker_request_how_to, :layout => :fixed_61, :locals => {}
 end
 
 get '/maker_request/:maker_request_id/view/?' do
@@ -29,7 +29,7 @@ get '/maker_request/:maker_request_id/view/?' do
     # can only view open requests
     not_found if maker_request.nil? || maker_request.status_id != Maker_Request::STATUS_OPEN
 
-    erb :maker_request_view, :layout => :fixed, :locals => {
+    erb :maker_request_view, :layout => :fixed_61, :locals => {
         maker_request: maker_request
     }
 end
@@ -42,7 +42,7 @@ get '/maker_request/:maker_request_uuid/edit/?' do
     maker_request = Maker_Request.find_by(uuid: params[:maker_request_uuid])
     not_found if maker_request.nil?
 
-    erb :maker_request, :layout => :fixed, :locals => {
+    erb :maker_request, :layout => :fixed_61, :locals => {
         maker_request: maker_request,
         extras: {
             confirm_email: maker_request.requestor_email,
@@ -59,7 +59,7 @@ get '/maker_request/:maker_request_uuid/manage/?' do
     maker_request = Maker_Request.find_by(uuid: params[:maker_request_uuid])
     not_found if maker_request.nil?
 
-    erb :maker_request_manage, :layout => :fixed, :locals => {
+    erb :maker_request_manage, :layout => :fixed_61, :locals => {
         maker_request: maker_request
     }
 end
@@ -153,7 +153,7 @@ post '/maker_request/?' do
     # display errors
     errors.each { |error| flash :alert, error[:heading], error[:message] }
 
-    erb :maker_request, :layout => :fixed, :locals => {
+    erb :maker_request, :layout => :fixed_61, :locals => {
         maker_request: maker_request,
         extras: extras
     }
@@ -199,7 +199,7 @@ post '/maker_request/:maker_request_uuid/edit/?' do
     # display errors
     errors.each { |error| flash :alert, error[:heading], error[:message] }
 
-    erb :maker_request, :layout => :fixed, :locals => {
+    erb :maker_request, :layout => :fixed_61, :locals => {
         maker_request: maker_request,
         extras: extras
     }
@@ -216,7 +216,7 @@ get '/maker_request/list/?' do
         where(status_id: Maker_Request::STATUS_OPEN).
         where("created > DATE_SUB(NOW(), INTERVAL #{Maker_Request::EXPIRATION_DAYS} DAY)").
         order(category_id: :desc, created: :asc).all
-    erb :maker_request_list, :layout => :fixed, :locals => {
+    erb :maker_request_list, :layout => :fixed_61, :locals => {
         maker_requests: maker_requests
     }
 end
@@ -234,7 +234,7 @@ get '/maker_request/lookup/?' do
         maker_requests = Maker_Request.where(requestor_email: lookup_email).order(category_id: :desc, created: :asc).all
     end
 
-    erb :maker_request_lookup, :layout => :fixed, :locals => {
+    erb :maker_request_lookup, :layout => :fixed_61, :locals => {
         lookup_email: lookup_email,
         maker_requests: maker_requests
     }

@@ -22,7 +22,7 @@ get '/admin/alerts/?' do
 	end
 	alerts_signups = AlertSignup.all
 
-	erb :'admin/alerts', :layout => :fixed, :locals => {
+	erb :'admin/alerts', :layout => :fixed_61, :locals => {
 		:alerts => alerts,
 		:alerts_signups => alerts_signups
 	}
@@ -33,7 +33,7 @@ get '/admin/alerts/create/?' do
 	require_login
 	@breadcrumbs << {:text => 'Admin Alerts', :href => '/admin/alerts/'} << {:text => 'Create Alert'}
 
-	erb :'admin/edit_alert', :layout => :fixed, :locals => {
+	erb :'admin/edit_alert', :layout => :fixed_61, :locals => {
 		:alert => Alert.new
 	}
 end
@@ -85,7 +85,7 @@ get '/admin/alerts/:alert_id/edit/?' do
 		redirect '/admin/alerts/'
 	end
 
-	erb :'admin/edit_alert', :layout => :fixed, :locals => {
+	erb :'admin/edit_alert', :layout => :fixed_61, :locals => {
 		:alert => alert
 	}
 end

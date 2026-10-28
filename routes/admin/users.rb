@@ -180,7 +180,7 @@ get '/admin/users/?' do
         end
     end
 
-    erb :'admin/users', :layout => :fixed, :locals => {
+    erb :'admin/users', :layout => :fixed_61, :locals => {
         :users => users,
         :first_name => first_name,
         :last_name => last_name,
@@ -199,7 +199,7 @@ get '/admin/users/create/?' do
     not_found unless has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER)
 
     @breadcrumbs << {:text => 'Admin Users', :href => '/admin/users/'} << {:text => 'Create User'}
-    erb :'admin/new_user', :layout => :fixed, :locals => {
+    erb :'admin/new_user', :layout => :fixed_61, :locals => {
         :user => User.new
     }
 end
@@ -263,7 +263,7 @@ get '/admin/users/:user_id/edit/?' do
     end
 
     @breadcrumbs << {:text => 'Admin Users', :href => '/admin/users/'} << {:text => 'Edit User'}
-    erb :'admin/edit_user', :layout => :fixed, :locals => {
+    erb :'admin/edit_user', :layout => :fixed_61, :locals => {
         :user => user,
         :vehicles => Vehicle.where(:user_id => user.id).all,
         :permissions => Permission.where.not(:id => [
@@ -536,7 +536,7 @@ get '/admin/users/:user_id/manage/?' do
 		]
 	end
 
-    erb :'admin/manage_authorizations', :layout => :fixed, :locals => {
+    erb :'admin/manage_authorizations', :layout => :fixed_61, :locals => {
         :user => user,
         :tools => tools
     }
@@ -546,7 +546,7 @@ get '/admin/users/modify_expirations/?' do
     not_found unless has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER)
 
     @breadcrumbs << {:text => 'Admin Users', :href => '/admin/users/'} << {:text => 'Modify Expirations'}
-    erb :'admin/modify_expirations', :layout => :fixed
+    erb :'admin/modify_expirations', :layout => :fixed_61
 end
 
 post '/admin/users/modify_expirations/?' do

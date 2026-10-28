@@ -13,7 +13,7 @@ get '/admin/orientation_attended/?' do
 
     attendees = AttendedOrientation.all.order_by_last_name
 
-    erb :'admin/orientation_attended', :layout => :fixed, :locals => {
+    erb :'admin/orientation_attended', :layout => :fixed_61, :locals => {
         :attendees => attendees,
     }
 
@@ -50,7 +50,7 @@ post '/admin/orientation_attended/?' do
 
     attendees = AttendedOrientation.all.order_by_last_name
 
-    erb :'admin/orientation_attended', :layout => :fixed, :locals => {
+    erb :'admin/orientation_attended', :layout => :fixed_61, :locals => {
         :attendees => attendees,
     }
 

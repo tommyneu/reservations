@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<% template_dep_version = Time.now.strftime("%F")  %>
+<html lang="en">
+  <head>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_6.1/includes/global/head-1.html"), encoding: 'UTF-8')).result %>
+    <!--
+      Membership and regular participation in the University of Nebraska-Lincoln (UNL) Web Developer Network (WDN) is required to use the UNLedu Web Framework. Visit the WDN site at https://wdn.unl.edu/. Register for our mailing list and add your site or server to UNL Web Audit.
+      All framework code is the property of the UNL Web Developer Network. The code seen in a source code view is not, and may not be used as, a template. You may not use this code, a reverse-engineered version of this code, or its associated visual presentation in whole or in part to create a derivative work.
+      This message may not be removed from any pages based on the UNLedu Web Framework.
+
+      $Id: local.dwt | 091d90b877cc56365172087efd3621e4bb0362b9 | Tue May 26 16:50:15 2026 -0500 | Ryan Dee  $
+    -->
+    <!-- TemplateBeginEditable name="doctitle" -->
+    <title><%= CONFIG['app']['title'] %> | University of Nebraska&ndash;Lincoln</title>
+    <!-- TemplateEndEditable -->
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_6.1/includes/global/head-2-local.html"), encoding: 'UTF-8')).result.gsub('$DEP_VERSION$', template_dep_version) %>
+    <!-- TemplateBeginEditable name="head" -->
+    <!-- Place optional header elements here -->
+    <link rel="stylesheet" href="/css/main.css?cb=<%= CONFIG['app']['cb_version'] %>">
+    <link rel="stylesheet" href="/css/jquery-ui.min-custom.css?cb=<%= CONFIG['app']['cb_version'] %>">
+    <!-- TemplateEndEditable -->
+  </head>
+  <body class="unl" data-version="6.1" data-template="local">
+    <main class="dcf-main dcf-pt-8" id="dcf-main" role="main" tabindex="-1">
+      <div class="dcf-bleed">
+        <div class="dcf-wrapper dcf-pb-8">
+          <!-- TemplateBeginEditable name="maincontentarea" -->
+          <%== yield %>
+          <!-- TemplateEndEditable -->
+        </div>
+      </div>
+    </main>
+    <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_6.1/includes/global/js-body-local.html"), encoding: 'UTF-8')).result %>
+    <!-- TemplateBeginEditable name="jsbody" -->
+    <!-- Put your custom JavaScript here -->
+    <script type="text/javascript">WDN.initializePlugin("notice");</script>
+    <% if SS_ID == 8 %>
+      <script>
+        window.addEventListener('inlineJSReady', function() {
+          let serviceURL = '<%= request.base_url %>/home/';
+          let loginURL = 'https://shib.unl.edu/idp/profile/cas/login?service=' + encodeURIComponent(serviceURL);
+          let logoutURL = encodeURI('<%= request.base_url %>/logout/');
+
+          WDN.setPluginParam('idm', 'login', loginURL);
+          WDN.setPluginParam('idm', 'logout', logoutURL);
+
+          require(['idm'], function(idm) {
+            <% if @user.nil? %>
+              idm.renderAsLoggedOut();
+            <% else %>
+              let username = '<%= @user&.username %>' || "unknown";
+              let profileURL = 'https://directory.unl.edu/people/' + username;
+              let directoryAPI = profileURL + '?format=json';
+
+              fetch(directoryAPI)
+                .then(response => response.json())
+                .then(data => {
+                  let firstName = (data.givenName && data.givenName.length > 0) ? data.givenName[0] : "User";
+
+                  idm.setUser({
+                    'uid': username,
+                    'cn': [username],
+                    'displayName': [firstName]
+                  });
+
+                  idm.renderAsLoggedIn();
+
+                  let profileLink = document.querySelector('.dcf-idm-options a[href*="false"]');
+                  if (profileLink) {
+                    profileLink.setAttribute('href', profileURL);
+                  }
+                })
+                .catch(error => {
+                  console.error("Error fetching user data from directory API:", error);
+                });
+            <% end %>
+          });
+        }, false);
+      </script>
+    <% end %>
+    <%== @inline_body_script_content %>
+    <!-- TemplateEndEditable -->
+  </body>
+</html>

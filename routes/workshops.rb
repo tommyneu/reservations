@@ -31,7 +31,7 @@ get '/workshops/?' do
 						where('start_time >= ?', Time.now).order(:start_time => :asc).all
 	end
 
-	erb :workshops, :layout => :fixed, :locals => {
+	erb :workshops, :layout => :fixed_61, :locals => {
 		:events_advanced => events_advanced,
 		:events_creation => events_creation,
 		:events_general => events_general

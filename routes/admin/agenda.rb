@@ -59,7 +59,7 @@ get '/admin/agenda/' do
 		end
 	end
 
-	erb :'admin/agenda', :layout => :fixed, :locals => {
+	erb :'admin/agenda', :layout => :fixed_61, :locals => {
 		:reservations => reservations,
 		:events => events,
 		:date => date,

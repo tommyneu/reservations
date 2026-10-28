@@ -23,7 +23,7 @@ get '/me/?' do
       end
   end
 
-  erb :me, :layout => :fixed, :locals => {
+  erb :me, :layout => :fixed_61, :locals => {
     :vehicles => Vehicle.where(:user_id => @user.id).all,
     :primary_emergency_contact => primary_emergency_contact,
     :secondary_emergency_contact => secondary_emergency_contact
@@ -157,7 +157,7 @@ get '/check_in_login/?' do
   unless @user.nil?
     redirect '/check_in/'
   end
-  erb :check_in_login, :layout => :fixed_no_toolbar
+  erb :check_in_login, :layout => :fixed_61_bare
 end
 
 post '/check_in_login/?' do
@@ -185,7 +185,7 @@ post '/check_in_login/?' do
 end
 
 get '/forgot_password_check_in/' do
-  erb :forgot_password, :layout => :fixed_no_toolbar
+  erb :forgot_password, :layout => :fixed_61_bare
 end
 
 post '/forgot_password_check_in/' do
@@ -207,7 +207,7 @@ get '/login/?' do
   unless @user.nil?
     redirect '/home/'
   end
-  erb :login, :layout => :fixed, :locals => {
+  erb :login, :layout => :fixed_61, :locals => {
     :next_page => params[:next_page]
   }
 end
@@ -249,7 +249,7 @@ end
 get '/admin/login/?' do
   @breadcrumbs << {:text => 'SSO Bypass Login'}
 
-  erb :'/admin/login', :layout => :fixed, :locals => {
+  erb :'/admin/login', :layout => :fixed_61, :locals => {
     :next_page => params[:next_page]
   }
 end
@@ -286,7 +286,7 @@ post '/admin/login/?' do
 end
 
 get '/forgot_password/' do
-  erb :forgot_password, :layout => :fixed
+  erb :forgot_password, :layout => :fixed_61
 end
 
 post '/forgot_password/' do
@@ -304,7 +304,7 @@ get '/reset_password/:token/?' do
   not_found if user.nil? || user.reset_password_expiry < Time.now
 
   @section = nil
-  erb :reset_password, :layout => :fixed, :locals => {
+  erb :reset_password, :layout => :fixed_61, :locals => {
     :token => params[:token]
   }
 end
