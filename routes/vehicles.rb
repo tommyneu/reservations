@@ -37,6 +37,8 @@ get '/vehicle/:vehicle_id/edit/?' do
   end
 
 post '/vehicle/:vehicle_id/edit/?' do
+	require_login
+
 	license_plate = params[:license_plate]
 	state = params[:state]
 	make = params[:make]
@@ -96,6 +98,8 @@ end
 
 
 post '/vehicle/add/?' do
+	require_login
+
     vehicle = Vehicle.new
 	license_plate = params[:license_plate]
 	state = params[:state]
@@ -145,6 +149,8 @@ post '/vehicle/add/?' do
 end
 
 post '/vehicle/:vehicle_id/delete/?' do
+	require_login
+
 	vehicle = Vehicle.find_by(:id => params[:vehicle_id])
 	if vehicle.nil?
 		# that vehicle does not exist
