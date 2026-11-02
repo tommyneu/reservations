@@ -2,11 +2,11 @@
 
 <% if params[:returning_to_warehouse] %>
     <div>
-        <a href="/checkout/warehouse/" class="dcf-btn dcf-btn-secondary dcf-25% dcf-w-max-2xs dcf-mb-4" type="button">Back to Warehouse</a>
+        <a href="/checkout/warehouse/" class="dcf-btn dcf-btn-secondary dcf-mb-4" type="button">Back to Warehouse</a>
     </div>
 <% else %>
     <div>
-        <a href="/checkout/user/?nuid=<%= user.user_nuid %>" class="dcf-btn dcf-btn-secondary dcf-25% dcf-w-max-2xs dcf-mb-4" type="button">Back to Checkout</a>
+        <a href="/checkout/user/?nuid=<%= user.user_nuid %>" class="dcf-btn dcf-btn-secondary dcf-mb-4" type="button">Back to Checkout</a>
     </div>
 <% end %>
 
