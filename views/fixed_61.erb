@@ -18,6 +18,19 @@
     <!-- Place optional header elements here -->
     <link rel="stylesheet" href="/css/main.css?cb=<%= CONFIG['app']['cb_version'] %>">
     <link rel="stylesheet" href="/css/jquery-ui.min-custom.css?cb=<%= CONFIG['app']['cb_version'] %>">
+    <script>
+      let serviceURL = '<%= request.base_url %>/home/';
+      let loginURL = 'https://shib.unl.edu/idp/profile/cas/login?service=' + encodeURIComponent(serviceURL);
+      let logoutURL = encodeURI('<%= request.base_url %>/logout/');
+
+      window.UNL.idm.pushConfig('loginRoute', loginURL);
+      window.UNL.idm.pushConfig('logoutRoute', logoutURL);
+
+      <% if !@user.nil? %>
+        let username = '<%= @user&.username %>' || "unknown";
+        window.UNL.idm.pushConfig('serverUser', username);
+      <% end %>
+    </script>
     <!-- TemplateEndEditable -->
   </head>
   <body class="unl" data-version="6.1" data-template="local">
@@ -162,51 +175,6 @@
     <%==  ERB.new(File.read(File.expand_path("#{ROOT}/public/wdn/templates_6.1/includes/global/js-body-local.html"), encoding: 'UTF-8')).result %>
     <!-- TemplateBeginEditable name="jsbody" -->
     <!-- Put your custom JavaScript here -->
-    <script type="text/javascript">WDN.initializePlugin("notice");</script>
-    <% if SS_ID == 8 %>
-      <script>
-        window.addEventListener('inlineJSReady', function() {
-          let serviceURL = '<%= request.base_url %>/home/';
-          let loginURL = 'https://shib.unl.edu/idp/profile/cas/login?service=' + encodeURIComponent(serviceURL);
-          let logoutURL = encodeURI('<%= request.base_url %>/logout/');
-
-          WDN.setPluginParam('idm', 'login', loginURL);
-          WDN.setPluginParam('idm', 'logout', logoutURL);
-
-          require(['idm'], function(idm) {
-            <% if @user.nil? %>
-              idm.renderAsLoggedOut();
-            <% else %>
-              let username = '<%= @user&.username %>' || "unknown";
-              let profileURL = 'https://directory.unl.edu/people/' + username;
-              let directoryAPI = profileURL + '?format=json';
-
-              fetch(directoryAPI)
-                .then(response => response.json())
-                .then(data => {
-                  let firstName = (data.givenName && data.givenName.length > 0) ? data.givenName[0] : "User";
-
-                  idm.setUser({
-                    'uid': username,
-                    'cn': [username],
-                    'displayName': [firstName]
-                  });
-
-                  idm.renderAsLoggedIn();
-
-                  let profileLink = document.querySelector('.dcf-idm-options a[href*="false"]');
-                  if (profileLink) {
-                    profileLink.setAttribute('href', profileURL);
-                  }
-                })
-                .catch(error => {
-                  console.error("Error fetching user data from directory API:", error);
-                });
-            <% end %>
-          });
-        }, false);
-      </script>
-    <% end %>
     <%== @inline_body_script_content %>
     <!-- TemplateEndEditable -->
   </body>

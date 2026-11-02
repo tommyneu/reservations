@@ -357,11 +357,12 @@ end %>
 </section>
 </form>
 
-<% append_script_declaration("WDN.initializePlugin('datepickers');") %>
-<% append_script_declaration(%q[WDN.initializePlugin('jqueryui', [function() {
-    $ = require('jquery');
-    $('#date').change(function () {
-        var date = $('#date').val().split('/');
-        window.location = window.location.href.split('?')[0] + '?date=' + date[2] + '-' + date[0] + '-' + date[1];
+<% append_script_declaration(%q[
+    const date_input = document.getElementById('date');
+    date_input.addEventListener('change', () => {
+        const date_data = date_input.value.split('/');
+        const location_url = new URL(window.location.href);
+        location_url.searchParams.set('date', date_data[2] + '-' + date_data[0] + '-' + date_data[1]);
+        window.location = location_url.toString();
     });
-}]);]) %>
+]) %>

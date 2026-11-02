@@ -83,11 +83,6 @@
                             </select>
                         </div>
                     </fieldset>
-                    <script>
-                        window.addEventListener('inlineJSReady', function() {
-                            WDN.initializePlugin('collapsible-fieldsets');
-                        }, false);
-                    </script>
                 <% end %>
 
                 <div class="dcf-form-group">
@@ -470,8 +465,6 @@
         end_hour_input.value = new_end_hour_in_12;
         end_minute_input.value = new_end_minute;
     }
-
-    WDN.initializePlugin('datepickers');
 
     const date_picker_group = document.getElementById('date-picker-group');
     const init_occurrence_groups = date_picker_group.querySelectorAll('.occurrence_group');

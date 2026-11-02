@@ -85,12 +85,6 @@
                             </div>
                         </fieldset>
                     </form>
-
-                    <script>
-                        window.addEventListener('inlineJSReady', function() {
-                            WDN.initializePlugin('collapsible-fieldsets');
-                        }, false);
-                    </script>
                 <div style="margin-bottom: 20px;">
                     <table class="dcf-w-100% dcf-table dcf-table-bordered" aria-label="Event Listings">
                         <thead>
@@ -179,7 +173,6 @@
                 </div>
             </section>
             <% if total_pages > 1 %>
-                <% append_script_declaration("WDN.initializePlugin('pagination');") %>
                 <nav class="dcf-pagination dcf-mt-3">
                     <ol class="dcf-list-bare dcf-list-inline">
                     <% if page != 1 %>
@@ -222,7 +215,6 @@
     </div>
 </section>
 
-<% append_script_declaration("WDN.initializePlugin('tabs');") %>
 <% append_script_declaration(%q[require(['jquery'], function($) {
     $(document).ready(function() {
         $('.delete-event').submit(function (submit) {

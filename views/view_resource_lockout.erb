@@ -160,11 +160,6 @@
 		</ol>
 	</div>
 </div>
-<script>
-  window.addEventListener('inlineJSReady', function() {
-    WDN.initializePlugin('tabs');
-  }, false);
-</script>
 
 <% active_lockouts.each do |lockout| %>
 	<form id="release-lockout-form-<%= lockout.id %>" class="dcf-form" action="/lockout/<%= tool.id %>/release/<%= lockout.id %>/" method="post">

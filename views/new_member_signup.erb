@@ -197,12 +197,6 @@
                     </div>
                 </div>
 
-                <script>
-                    window.addEventListener('inlineJSReady', function() {
-                        WDN.initializePlugin('collapsible-fieldsets');
-                    }, false);
-                </script>
-
                 <div class="dcf-input-checkbox dcf-mb-4">
                     <input type="checkbox" name="vehicle-update" id="vehicle-update" required>
                     <label for="vehicle-update">I UNDERSTAND I MUST UPDATE VEHICLE INFORMATION AS CHANGES OCCUR. <small class="dcf-required">Required</small></label>
@@ -334,7 +328,6 @@
     </div>
 </form>
 
-<% append_script_declaration("WDN.initializePlugin('datepickers');") %>
 <% if SS_ID == 1 %>
     <% append_script_tag('/js/innovationstudio_new_member_vehicle.js?cb=' + CONFIG['app']['cb_version']) %>
 <% end %>

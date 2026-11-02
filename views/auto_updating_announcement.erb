@@ -1,11 +1,12 @@
-<div id="announcement-notice-container" class="dcf-d-none">
+<div id="announcement-notice-container" class="dcf-d-none!">
     <div id="announcement-notice" class="dcf-notice dcf-notice-info" data-no-close-button="true" hidden>
         <h2></h2>
         <div></div>
     </div>
 </div>
 
-<script>
+<script type="module">
+    import { getClassInstance } from "/wdn/templates_6.1/js/lib/unl-utility.js";
     const announcement_notice_container = document.getElementById('announcement-notice-container');
     const announcement_notice = document.getElementById('announcement-notice');
     const announcement_url = "/api/announcements/";
@@ -38,11 +39,11 @@
             }
 
             if (announcement_json['has_announcement'] === true) {
-                announcement_notice_container.classList.remove('dcf-d-none');
+                announcement_notice_container.classList.remove('dcf-d-none!');
                 announcement_notice_header.innerText = announcement_json['header'];
                 announcement_notice_body.innerHTML = announcement_json['body'];
             } else {
-                announcement_notice_container.classList.add('dcf-d-none');
+                announcement_notice_container.classList.add('dcf-d-none!');
             }
 
         } catch(err) {
@@ -50,13 +51,8 @@
         }
     }
 
-    window.addEventListener('inlineJSReady', function() {
-        let check_interval = setInterval(() => {
-            if (announcement_notice.classList.contains('dcf-notice-initialized')) {
-                clearInterval(check_interval);
-                setInterval(fetch_notice, announcement_refresh_rate_ms);
-                fetch_notice();
-            }
-        }, 200);
-    }, false);
+    getClassInstance('announcement-notice').then((classInstance) => {
+        setInterval(fetch_notice, announcement_refresh_rate_ms);
+        fetch_notice();
+    });
 </script>

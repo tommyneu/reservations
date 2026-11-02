@@ -159,15 +159,17 @@ No events today. Perhaps you'd like to create one?<br>
 <a href="/admin/events/" class="dcf-btn dcf-btn-secondary">Go To Events</a>
 <% end %>
 
-<% append_script_declaration("WDN.initializePlugin('datepickers');") %>
+<% append_script_declaration(%q[
+    const date_input = document.getElementById('date');
+    const search_button = document.getElementById('search-btn');
+    const workshop_category = document.getElementById('workshop-category');
 
-<% append_script_declaration(%q[WDN.initializePlugin('jqueryui', [function() {
-    $ = require('jquery');
-
-    $('#search-btn').click(function (e) {
-        e.preventDefault();
-        var date = $('#date').val().split('/');
-        var workshopCategory = $('#workshop-category').val();
-        window.location = window.location.href.split('?')[0] + '?date=' + date[2] + '-' + date[0] + '-' + date[1] + '&workshop_category=' + workshopCategory;
+    search_button.addEventListener('click', () => {
+        const date_data = date_input.value.split('/');
+        const workshop_data = workshop_category.value;
+        const location_url = new URL(window.location.href);
+        location_url.searchParams.set('date', date_data[2] + '-' + date_data[0] + '-' + date_data[1]);
+        location_url.searchParams.set('workshop_category', workshop_data);
+        window.location = location_url.toString();
     });
-}]);]) %>
+]) %>
