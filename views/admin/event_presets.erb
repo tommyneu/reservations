@@ -1,7 +1,7 @@
 <h1 class="dcf-txt-h3">Manage Preset Events</h1>
 
-<section class="dcf-grid dcf-col-gap-vw">
-    <nav class="dcf-col-100% dcf-col-25%-start@sm">
+<section class="dcf-d-grid dcf-grid-cols-4 dcf-col-gap-vw">
+    <nav class="dcf-col-span-4 dcf-col-span-1@sm">
         <div class="toolbox">
             <h3>Toolbox</h3>
             <div class="tools">
@@ -13,7 +13,7 @@
     </nav>
 
     <% if preset_events.count > 0 %>
-    <div class="dcf-col-100% dcf-col-75%-end@sm">
+    <div class="dcf-col-span-4 dcf-col-span-3@sm">
         <table class="dcf-w-100% dcf-table dcf-table-bordered dcf-table-responsive" aria-label="Preset Event List">
             <thead>
                 <tr>
@@ -52,7 +52,7 @@
     </div>
     <% else %>
     <br>
-        <div class="dcf-col-100% dcf-col-75%-end@sm">
+        <div class="dcf-col-span-4 dcf-col-span-3@sm">
         <label>No preset events found. Click the "+ New Preset" button to get started.</label>
     </div>
     <% end %>

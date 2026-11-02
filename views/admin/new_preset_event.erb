@@ -1,110 +1,93 @@
 <form class="dcf-form" id="create-event-form" action="" method="POST" enctype="multipart/form-data">
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm">
-            <fieldset>
-                <legend>Preset Event Details</legend>
+    <fieldset style="width: clamp(20ch, 100%, 80ch);">
+        <legend>Preset Event Details</legend>
 
-                <div class="dcf-form-group">
-                    <label for="name">Event Name <small class="dcf-required">Required</small></label>
-                    <input class="dcf-w-100%" type="text" id="name" name="name" value="<%= preset_event.event_name %>"/>
-                </div>
+        <div class="dcf-form-group">
+            <label for="name">Event Name <small class="dcf-required">Required</small></label>
+            <input class="dcf-w-100%" type="text" id="name" name="name" value="<%= preset_event.event_name %>"/>
+        </div>
 
-                <div class="dcf-form-group">
-                    <label for="description">Description <small class="dcf-required">Required</small></label>
-                    <textarea rows="4" id="description" name="description"><%= preset_event.description %></textarea>
-                </div>
+        <div class="dcf-form-group">
+            <label for="description">Description <small class="dcf-required">Required</small></label>
+            <textarea rows="4" id="description" name="description"><%= preset_event.description %></textarea>
+        </div>
 
-                <div class="dcf-form-group">
-                    <label for="type">Type <small class="dcf-required">Required</small></label>
-                    <select id="type" name="type" class="use-select2">
-                        <option value=""></option>
-                        <% event_types.each do |type| %>
-                            <option <%= 'selected="selected"' if !preset_event.event_type_id.nil? && preset_event.event_type_id == type.id %> value="<%= type.id %>"><%= type.description %></option>
-                        <% end %>
-                    </select>
-                </div>
-
-                <% if SS_ID == 1 %>
-                    <div class="dcf-form-group">
-                        <label for="area">Shop Area <small class="dcf-required">Required</small></label>
-                        <select id="area" name="area" required>
-                            <option value="General" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'General' %>>General</option>
-                            <option value="Graphics Studio" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Graphics Studio' %>>Graphics Studio</option>
-                            <option value="Metal Shop" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Metal Shop' %>>Metal Shop</option>
-                            <option value="Rapid Prototyping" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Rapid Prototyping' %>>Rapid Prototyping</option>
-                            <option value="Textiles" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Textiles' %>>Textiles</option>
-                            <option value="Wood Shop" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Wood Shop' %>>Wood Shop</option>
-                            <option value="Robotics" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Robotics' %>>Robotics</option>
-                            <option value="Ceramics" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Ceramics' %>>Ceramics</option>
-                        </select>
-                    </div>
+        <div class="dcf-form-group">
+            <label for="type">Type <small class="dcf-required">Required</small></label>
+            <select id="type" name="type" class="use-select2">
+                <option value=""></option>
+                <% event_types.each do |type| %>
+                    <option <%= 'selected="selected"' if !preset_event.event_type_id.nil? && preset_event.event_type_id == type.id %> value="<%= type.id %>"><%= type.description %></option>
                 <% end %>
-
-                <div class="dcf-form-group">
-                    <label for="duration">Duration (in minutes) <small class="dcf-required">Required</small></label>
-                    <input value="<%= preset_event.duration %>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" type="number" id="duration" name="duration" aria-label="Duration"/>
-                </div>
-
-                <div class="dcf-form-group">
-                    <div class="dcf-input-checkbox dcf-d-inline">
-                        <input type="checkbox" <%= 'checked="checked"' unless preset_event.max_signups.nil? %> id="limit-signups" name="limit_signups"><label class="dcf-label" for="limit-signups">Limit signups for this event to: </label>
-                    </div>
-                    <label for="max-signups"><span class="dcf-sr-only">Max Signups</span></label>
-                    <input value="<%= preset_event.max_signups %>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" type="number" id="max-signups" name="max_signups" class="dcf-d-inline dcf-w-10" aria-label="Number of signups to limit."/>
-                </div>
-            </fieldset>
+            </select>
         </div>
-    </div>
 
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm" style="margin-top:15px">
-            <fieldset>
-                <legend>Preset Event Reservation Tools</legend>
-                <table class="dcf-table dcf-table-bordered" aria-describedby="manage-tools-reservations">
-                    <tbody style="display:block;max-height:600px;overflow-y:scroll;">
-                    <% reservable_tools.each do |tool| %>
-                        <tr>
-                            <td>
-                                <div class="dcf-input-checkbox">
-                                    <input <%= 'checked="checked"' if preset_event.has_tool_reservation(tool.id) %> type="checkbox" name="reservation_tool_<%= tool.id %>" id="tool-reservation-<%= tool.id %>">
-                                    <label for="tool-reservation-<%= tool.id %>"><%=tool.category_name %> - <%= tool.name %> - <%= tool.model %></label>
-                                </div>
-                            </td>
-                        </tr>
-                    <% end %>
-                    </tbody>
-                </table>
-            </fieldset>
+        <% if SS_ID == 1 %>
+            <div class="dcf-form-group">
+                <label for="area">Shop Area <small class="dcf-required">Required</small></label>
+                <select id="area" name="area" required>
+                    <option value="General" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'General' %>>General</option>
+                    <option value="Graphics Studio" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Graphics Studio' %>>Graphics Studio</option>
+                    <option value="Metal Shop" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Metal Shop' %>>Metal Shop</option>
+                    <option value="Rapid Prototyping" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Rapid Prototyping' %>>Rapid Prototyping</option>
+                    <option value="Textiles" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Textiles' %>>Textiles</option>
+                    <option value="Wood Shop" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Wood Shop' %>>Wood Shop</option>
+                    <option value="Robotics" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Robotics' %>>Robotics</option>
+                    <option value="Ceramics" <%= 'selected="selected"' if !preset_event.area.nil? && preset_event.area == 'Ceramics' %>>Ceramics</option>
+                </select>
+            </div>
+        <% end %>
+
+        <div class="dcf-form-group">
+            <label for="duration">Duration (in minutes) <small class="dcf-required">Required</small></label>
+            <input value="<%= preset_event.duration %>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" type="number" id="duration" name="duration" aria-label="Duration"/>
         </div>
-    </div>
 
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm" style="margin-top:15px">
-            <fieldset>
-                <legend>Preset Event Authorization Tools</legend>
-                <table class="dcf-table dcf-table-bordered" aria-describedby="manage-tools">
-                    <tbody style="display:block;max-height:600px;overflow-y:scroll;">
-                    <% tools.each do |tool| %>
-                        <tr>
-                            <td>
-                                <div class="dcf-input-checkbox">
-                                    <input <%= 'checked="checked"' if preset_event.get_resource_ids.include?(tool.id) %> type="checkbox" name="tool_<%= tool.id %>" id="tool-<%= tool.id %>">
-                                    <label for="tool-<%= tool.id %>"><%=tool.category_name %> - <%= tool.name %> - <%= tool.model %></label>
-                                </div>
-                            </td>
-                        </tr>
-                    <% end %>
-                    </tbody>
-                </table>
-            </fieldset>
+        <div class="dcf-form-group">
+            <div class="dcf-input-checkbox dcf-d-inline">
+                <input type="checkbox" <%= 'checked="checked"' unless preset_event.max_signups.nil? %> id="limit-signups" name="limit_signups"><label class="dcf-label" for="limit-signups">Limit signups for this event to: </label>
+            </div>
+            <label for="max-signups"><span class="dcf-sr-only">Max Signups</span></label>
+            <input value="<%= preset_event.max_signups %>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" type="number" id="max-signups" name="max_signups" class="dcf-d-inline dcf-w-10" aria-label="Number of signups to limit."/>
         </div>
-    </div>
+    </fieldset>
 
+    <fieldset style="width: clamp(20ch, 100%, 80ch);">
+        <legend>Preset Event Reservation Tools</legend>
+        <table class="dcf-table dcf-table-bordered" aria-describedby="manage-tools-reservations">
+            <tbody style="display:block;max-height:600px;overflow-y:scroll;">
+            <% reservable_tools.each do |tool| %>
+                <tr>
+                    <td>
+                        <div class="dcf-input-checkbox">
+                            <input <%= 'checked="checked"' if preset_event.has_tool_reservation(tool.id) %> type="checkbox" name="reservation_tool_<%= tool.id %>" id="tool-reservation-<%= tool.id %>">
+                            <label for="tool-reservation-<%= tool.id %>"><%=tool.category_name %> - <%= tool.name %> - <%= tool.model %></label>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </fieldset>
 
-    <div class="dcf-grid dcf-col-gap-vw" style="margin-top:20px;">
-        <div class="dcf-col-100% dcf-col-67%-start@sm">
-            <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit"><%= preset_event.id.nil? ? 'Create' : 'Save' %> Preset</button>
-        </div>
-    </div>
+    <fieldset style="width: clamp(20ch, 100%, 80ch);">
+        <legend>Preset Event Authorization Tools</legend>
+        <table class="dcf-table dcf-table-bordered" aria-describedby="manage-tools">
+            <tbody style="display:block;max-height:600px;overflow-y:scroll;">
+            <% tools.each do |tool| %>
+                <tr>
+                    <td>
+                        <div class="dcf-input-checkbox">
+                            <input <%= 'checked="checked"' if preset_event.get_resource_ids.include?(tool.id) %> type="checkbox" name="tool_<%= tool.id %>" id="tool-<%= tool.id %>">
+                            <label for="tool-<%= tool.id %>"><%=tool.category_name %> - <%= tool.name %> - <%= tool.model %></label>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit"><%= preset_event.id.nil? ? 'Create' : 'Save' %> Preset</button>
 </form>
 </div>

@@ -1,8 +1,7 @@
 <h1 class="dcf-txt-h3">Create User</h1>
 
-<div class="dcf-grid dcf-col-gap-vw">
-<form id="new-user" action="" method="POST" enctype="multipart/form-data" class="dcf-form dcf-col-100% dcf-col-50%-start@sm">
-    <fieldset>
+<form id="new-user" action="" method="POST" enctype="multipart/form-data" class="dcf-form">
+    <fieldset style="width: clamp(20ch, 100%, 80ch);">
         <legend>User Details</legend>
 
         <div class="dcf-form-group">
@@ -59,5 +58,4 @@
         <button class="dcf-mt-3 dcf-btn dcf-btn-primary" type="submit">Create</button>
     </fieldset>
 </form>
-</div>
 <% append_script_declaration("WDN.initializePlugin('datepickers');") %>

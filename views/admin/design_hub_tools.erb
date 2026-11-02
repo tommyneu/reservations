@@ -101,7 +101,7 @@
         method="POST"
         id="delete-form-<%= tool.id %>"
         action="/admin/tools/<%= tool.id %>/delete/"
-        class="dcf-form delete-form delete-tool dcf-d-none"
+        class="delete-form dcf-d-none"
         onSubmit="return confirm('Are you sure you want to delete <%= tool.name %>?') "
     ></form>
 <% end %>
@@ -111,13 +111,13 @@
 			method="POST"
 			id="delete-checkable-form-<%= tool.id %>"
 			action="/admin/tools/<%= tool.id %>/delete_checkable/"
-			class="dcf-form delete-form delete-tool dcf-d-none"
+			class="delete-form dcf-d-none"
 			onSubmit="return confirm('Are you sure you want to delete <%= tool.tool_name %>?') "
 	></form>
 
 	<form 
 		id="tool-force-checkin-<%= tool.id %>"
-		class="dcf-form dcf-grid"
+		class="dcf-d-none"
 		action="/checkout/tool_checkin/?nuid=<%= nuid %>&tool_id=<%= tool[:id] %>"
 		method="POST" enctype="application/x-www-form-urlencoded"></form>
 <% end %>

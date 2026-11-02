@@ -1,24 +1,15 @@
 <h1>Manage Studio Spaces</h1>
 
 <form class="dcf-form" action="" method="POST" >
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm">
-            <fieldset>
-                <legend>Create New Studio Space</legend>
-                <div class="dcf-form-group">
-                    <label for="name">Studio Space Name <small class="dcf-required">Required</small></label>
-                    <input class="dcf-w-100%" type="text" name="name" id="name" value=''/>
-                </div>
-
-                <div class="dcf-grid dcf-col-gap-vw" style="margin-top:20px;">
-                    <div class="dcf-col-100% dcf-col-67%-start@sm">
-                        <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit">Create</button>
-                    </div>
-                </div>
-            </fieldset>
-	
+    <fieldset style="width: clamp(20ch, 100%, 80ch);">
+        <legend>Create New Studio Space</legend>
+        <div class="dcf-form-group">
+            <label for="name">Studio Space Name <small class="dcf-required">Required</small></label>
+            <input class="dcf-w-100%" type="text" name="name" id="name" value=''/>
         </div>
-    </div>
+
+        <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit">Create</button>
+    </fieldset>
 </form>
 
 <br>

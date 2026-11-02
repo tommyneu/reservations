@@ -25,14 +25,14 @@
 
 <form class="dcf-form dcf-mb-6" id="find-controls" style="padding-top: 25px">
     <h3> Check In Log </h3>
-    <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
-        <div class="dcf-col-100% dcf-col-25%-start@md">
+    <div class="dcf-d-grid dcf-grid-cols-4 dcf-col-gap-vw dcf-row-gap-6">
+        <div class="dcf-col-span-4 dcf-col-span-1@md">
             <label>Find check in by:</label>
             <br>
             <a href="/admin/view_check_in/" class="dcf-btn dcf-btn-secondary">Clear</a>
         </div>
-        <div class="dcf-col-100% dcf-col-75%-end@md">
-            <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw">
+        <div class="dcf-col-span-4 dcf-col-span-3@md">
+            <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
                 <div>
                     <label for="name">Name:</label>
                     <input id="name" tabindex="1" type="text" name="name" value="<%= name != "" ? name : "" %>" style="width:100%;" />
@@ -70,12 +70,8 @@
                 </div>
                 <div>
                     <label for="expiration-date">Check In Date:</label>
-                    <div class="dcf-grid dcf-col-gap-1 dcf-row-gap-2 dcf-flex-wrap">
-                        <div class="dcf-col-100%">
-                            <div class="dcf-datepicker">
-                                <input id="check-in-date" tabindex="1" value="<%= check_in_date != "" ? check_in_date : "" %>" name="check_in_date" title="Check In Date" type="text"  style="width:100%;"/>
-                            </div>
-                        </div>
+                    <div class="dcf-datepicker">
+                        <input id="check-in-date" tabindex="1" value="<%= check_in_date != "" ? check_in_date : "" %>" name="check_in_date" title="Check In Date" type="text"  style="width:100%;"/>
                     </div>
                 </div>
             </div>

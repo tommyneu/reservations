@@ -1,8 +1,8 @@
-<section class="dcf-grid dcf-col-gap-vw">
-    <% event_div_class = 'dcf-col-100%' %>
+<section class="dcf-d-grid dcf-grid-cols-4 dcf-col-gap-vw">
+    <% event_div_class = 'dcf-col-span-4' %>
     <% if has_permission?(Permission::MANAGE_EVENTS) %>
-    <% event_div_class = 'dcf-col-100% dcf-col-75%-end@sm' %>
-    <nav class="dcf-col-100% dcf-col-25%-start@sm">
+    <% event_div_class = 'dcf-col-span-4 dcf-col-span-3@sm' %>
+    <nav class="dcf-col-span-4 dcf-col-span-1@sm">
         <div class="toolbox">
             <h3>Toolbox</h3>
             <div class="tools">

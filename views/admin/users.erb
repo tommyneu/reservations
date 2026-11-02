@@ -16,14 +16,14 @@
 </div>
 
 <form class="dcf-form dcf-mb-6" id="find-controls">
-    <div class="dcf-grid dcf-col-gap-vw dcf-row-gap-6">
-        <div class="dcf-col-100% dcf-col-25%-start@md">
+    <div class="dcf-d-grid dcf-grid-cols-4 dcf-col-gap-vw dcf-row-gap-6">
+        <div class="dcf-col-span-4 dcf-col-span-1@md">
             <label>Find users by:</label>
             <br>
             <a href="/admin/users/" class="dcf-btn dcf-btn-secondary">Clear</a>
         </div>
-        <div class="dcf-col-100% dcf-col-75%-end@md">
-            <div class="dcf-grid-full dcf-grid-halves@sm dcf-col-gap-vw">
+        <div class="dcf-col-span-4 dcf-col-span-3@md">
+            <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
                 <div>
                     <label for="first-name">First Name:</label>
                     <input id="first-name" tabindex="1" type="text" name="first_name" value="<%= first_name != "" ? first_name : "" %>" style="width:100%;" />
@@ -51,17 +51,17 @@
                 </div>
                 <div>
                     <label for="expiration-date">Expiration Date:</label>
-                    <div class="dcf-grid dcf-col-gap-1 dcf-row-gap-2 dcf-flex-wrap">
-                        <div class="dcf-col-100% dcf-col-33%-start@sm">
+                    <div class="dcf-d-grid dcf-grid-cols-3 dcf-col-gap-1 dcf-row-gap-2 dcf-flex-wrap">
+                        <div class="dcf-col-span-3 dcf-col-span-1@sm">
                             <select id="expiration-date-operation" tabindex="1" name="expiration_date_operation" class="dcf-input-select">
                                 <option value=""></option>
                                 <% EXPIRATION_DATE_SEARCH_OPERATIONS.each_with_index do |operation, value| %>
-                                    <option <%= 'selected="selected"' if expiration_date_operation.to_i == (value + 1) %> value="<%= value + 1 %>"><%= operation %></option>
+                                    <option <%= 'selected="selected"' if expiration_date_operation.to_i == (value + 1) %> value="<%= value + 1 %>"><%== operation %></option>
                                 <% end %>
                             </select>
                             <input type="hidden" name="hidden-expiration-date-operation" id="hidden-expiration-date-operation" value="<%= expiration_date_operation %>">
                         </div>
-                        <div class="dcf-col-100% dcf-col-67%-end@sm">
+                        <div class="dcf-col-span-1 dcf-col-span-2@sm">
                             <div class="dcf-datepicker">
                                 <input id="expiration-date" tabindex="1" value="<%= expiration_date != "" ? expiration_date : "" %>" name="expiration_date" title="Expiration Date" type="text"  style="width:100%;"/>
                             </div>

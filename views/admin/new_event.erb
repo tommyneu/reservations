@@ -1,6 +1,6 @@
 <form class="dcf-form" id="create-event-form" action="" method="POST" enctype="multipart/form-data">
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm">
+    <div class="dcf-d-grid dcf-grid-cols-3 dcf-col-gap-vw">
+        <div class="dcf-col-span-3 dcf-col-span-2@sm">
             <fieldset>
                 <legend>Event Details</legend>
 
@@ -259,7 +259,7 @@
                                 <input id="start-date" class="start-date-input" value="<%= event.start_time.in_time_zone.strftime('%m/%d/%Y') if !event.start_time.nil? %>" name="start_date[0]" type="text" required />
                             </div>
                         </div>
-                        <div class="dcf-d-grid dcf-grid-full dcf-grid-halves@md dcf-col-gap-vw">
+                        <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@md dcf-col-gap-vw">
                             <fieldset class="dcf-pl-3 dcf-pr-3 dcf-pt-1 dcf-pb-1 dcf-mb-0">
                                 <legend>Start Time <small class="dcf-required">Required</small></legend>
                                 <div class="dcf-d-flex dcf-jc-center dcf-ai-center">
@@ -376,7 +376,7 @@
             </fieldset>
         </div>
         <input type="hidden" name="hidden-duration" id="duration" value="<%=duration%>">
-        <div class="dcf-col-100% dcf-col-33%-end@sm">
+        <div class="dcf-col-span-3 dcf-col-span-1@sm">
             <div class="visual-island">
                 <div class="vi-header">
                     <p class="dcf-mb-0 dcf-pb-0">Image</p>
@@ -415,11 +415,7 @@
         </div>
     </div>
 
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-67%-start@sm">
-            <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit"><%= event.id.nil? ? 'Create' : 'Save' %> Event</button>
-        </div>
-    </div>
+    <button class="dcf-btn dcf-btn-primary dcf-float-left" type="submit"><%= event.id.nil? ? 'Create' : 'Save' %> Event</button>
 </form>
 </div>
 <br>

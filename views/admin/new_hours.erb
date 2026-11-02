@@ -1,9 +1,8 @@
 <h1 class="dcf-txt-h3">Set New Hours</h1>
 
 <form class="dcf-form" id="create-hours" action="" method="POST">
-    <div class="dcf-grid dcf-col-gap-vw">
-        <div class="dcf-col-100% dcf-col-50%-start@sm">
-
+    <div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
+        <div>
             <div class="dcf-form-group">
                 <label for="day-of-week">Day Of Week</label>
                 <select id="day-of-week" name="day_of_week" class="dcf-input-select">
@@ -27,7 +26,7 @@
         <legend>Hours</legend>
         <span>Studio will be closed for all hours you do not indicate here.</span>
         <input type="hidden" name="hours" id="hours" />
-        <div id="hours-container">
+        <div id="hours-container" class="dcf-mt-3">
             <% hours = [{:status => 'open', :start => 540, :end => 1020}] if hours.nil? %>
             <% hours.each_index do |x| %>
             <% record = hours[x] %>

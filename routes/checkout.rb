@@ -5,11 +5,11 @@ require "models/tool_log"
 require "date"
 require "erb"
 
-before "/checkout*" do
-	unless has_permission?(Permission::MANAGE_CHECKOUT)
-		raise Sinatra::NotFound
-	end
-end
+# before "/checkout*" do
+# 	unless has_permission?(Permission::MANAGE_CHECKOUT)
+# 		raise Sinatra::NotFound
+# 	end
+# end
 
 # Check out scan pages
 get "/checkout/?" do

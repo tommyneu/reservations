@@ -4,9 +4,8 @@
     <a class="dcf-btn dcf-btn-primary" href="/admin/email/presets/create/">+ New Preset</a>
 </div>
 
-<section class="dcf-grid dcf-col-gap-vw">
+<section>
     <% if preset_emails.count > 0 %>
-    <div class="dcf-col-100%">
         <table class="dcf-w-100% dcf-table dcf-table-bordered dcf-table-responsive" aria-label="Preset Email List">
             <thead>
                 <tr>
@@ -21,7 +20,7 @@
                 <tr>
                     <td><%= preset.name %></td>
                     <td><%= preset.subject %></td>
-                    <td><%= preset.body.size > 50 ? preset.body[0...50] + "..." : preset.body %></td>
+                    <td><%== preset.body.size > 50 ? preset.body[0...50] + "..." : preset.body %></td>
                     <td class="table-actions">
                         <a href="/admin/email/presets/<%= preset.id %>/edit/" class="dcf-mt-1 dcf-btn dcf-btn-primary">Edit</a>
                         <form class="dcf-form delete-form delete-preset" action="/admin/email/presets/<%= preset.id %>/delete/" method="POST">
@@ -32,11 +31,10 @@
             <% end %>
             </tbody>
         </table>
-    </div>
     <% else %>
     <br>
-    <div class="dcf-col-100%">
-        <label>No preset emails found. Click the "+ New Preset" button to get started.</label>
+    <div>
+        <p>No preset emails found. Click the "+ New Preset" button to get started.</p>
     </div>
     <% end %>
 </section>

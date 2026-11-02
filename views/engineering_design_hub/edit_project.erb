@@ -10,8 +10,8 @@
     </div>
 <% end %>
 
-<div class="dcf-grid dcf-col-gap-vw">
-    <fieldset class="dcf-form dcf-col-100% dcf-col-50%-start@sm unl-b-darker-gray dcf-rounded dcf-b-1 dcf-b-solid dcf-pt-4 dcf-pb-4 dcf-p dcf-pr-7 dcf-pl-7">
+<div class="dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@sm dcf-col-gap-vw">
+    <fieldset class="dcf-form unl-b-darker-gray dcf-rounded dcf-b-1 dcf-b-solid dcf-pt-4 dcf-pb-4 dcf-p dcf-pr-7 dcf-pl-7">
         <legend>Project Details</legend>
         <form id="edit-project-form" action="" method="POST" enctype="multipart/form-data">
             <div class="dcf-form-group ">
@@ -42,7 +42,7 @@
         </form>
     </fieldset>
 
-    <fieldset class="dcf-form dcf-col-100% dcf-col-50%-end@sm unl-b-darker-gray dcf-rounded dcf-b-1 dcf-b-solid dcf-pt-4 dcf-pb-4 dcf-p dcf-pr-7 dcf-pl-7">
+    <fieldset class="dcf-form unl-b-darker-gray dcf-rounded dcf-b-1 dcf-b-solid dcf-pt-4 dcf-pb-4 dcf-p dcf-pr-7 dcf-pl-7">
         <legend>Project Teammates</legend>
         <form class="dcf-form dcf-w-100% dcf-mb-1" id="find-nuid" action="/checkout/project/<%= project_id %>/edit/teammates/?" method="POST" enctype="application/x-www-form-urlencoded">
             <div class="dcf-input-group">
@@ -89,4 +89,3 @@
         </div>
     </fieldset>
 </div>
-      
