@@ -103,50 +103,49 @@
     <button type="submit" class="dcf-btn dcf-btn-primary">Submit</button>
 </form>
 
-<% append_script_declaration(%q[WDN.initializePlugin('jqueryui', [function() {
-    $ = require('jquery');
+<% append_script_module_declaration(%q[
+import $ from "/wdn/templates_6.1/js/lib/jQuery.js";
 
-    $('#hours-container').on('click', '.remove-hours', function(click) {
-        click.preventDefault();
-        $(this).closest('.hours-record').remove();
+$('#hours-container').on('click', '.remove-hours', function(click) {
+    click.preventDefault();
+    $(this).closest('.hours-record').remove();
+});
+
+$('#add-hours').click(function (click) {
+    click.preventDefault();
+    var random1 = Math.random().toString(36).substring(7);
+    var random2 = Math.random().toString(36).substring(7);
+    var element = $('#base-hours-0').clone();
+    element.find('.remove-hours').removeClass('hidden');
+    element.find('.start-time-am-pm').each(function(){
+        var id = random1 + '-' + Math.random().toString(36).substring(7);
+        $(this).attr('name', random1);
+        $(this).attr('id', id).next().attr('for', id);
+    });
+    element.find('.end-time-am-pm').each(function(){
+        var id = random2 + '-' + Math.random().toString(36).substring(7);
+        $(this).attr('name', random2);
+        $(this).attr('id', id).next().attr('for', id);
+    });
+    $('#hours-container').append(element);
+});
+
+$('#create-hours').submit(function (submit) {
+    var hours = []
+
+    $.each($('.hours-record'), function (index, element) {
+        element = $(element);
+        hours.push({
+            status: element.find('.hours-type').val(),
+            start_hour: element.find('.start-time-hour').val(),
+            start_minute: element.find('.start-time-minute').val(),
+            start_am_pm: element.find('.start-time-am-pm:checked').val(),
+            end_hour: element.find('.end-time-hour').val(),
+            end_minute: element.find('.end-time-minute').val(),
+            end_am_pm: element.find('.end-time-am-pm:checked').val(),
+        });
     });
 
-    $('#add-hours').click(function (click) {
-        click.preventDefault();
-        var random1 = Math.random().toString(36).substring(7);
-        var random2 = Math.random().toString(36).substring(7);
-        var element = $('#base-hours-0').clone();
-        element.find('.remove-hours').removeClass('hidden');
-        element.find('.start-time-am-pm').each(function(){
-            var id = random1 + '-' + Math.random().toString(36).substring(7);
-            $(this).attr('name', random1);
-            $(this).attr('id', id).next().attr('for', id);
-        });
-        element.find('.end-time-am-pm').each(function(){
-            var id = random2 + '-' + Math.random().toString(36).substring(7);
-            $(this).attr('name', random2);
-            $(this).attr('id', id).next().attr('for', id);
-        });
-        $('#hours-container').append(element);
-    });
-
-    $('#create-hours').submit(function (submit) {
-        var hours = []
-
-        $.each($('.hours-record'), function (index, element) {
-            element = $(element);
-            hours.push({
-                status: element.find('.hours-type').val(),
-                start_hour: element.find('.start-time-hour').val(),
-                start_minute: element.find('.start-time-minute').val(),
-                start_am_pm: element.find('.start-time-am-pm:checked').val(),
-                end_hour: element.find('.end-time-hour').val(),
-                end_minute: element.find('.end-time-minute').val(),
-                end_am_pm: element.find('.end-time-am-pm:checked').val(),
-            });
-        });
-
-        $('#hours').val(JSON.stringify(hours));
-    });
-
-}]);]) %>
+    $('#hours').val(JSON.stringify(hours));
+});
+]) %>

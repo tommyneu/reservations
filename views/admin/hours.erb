@@ -85,12 +85,13 @@
     </tbody>
 </table>
 
-<% append_script_declaration(%q[require(['jquery'], function($) {
-    $(document).ready(function() {
-        $('.delete-space-hour').submit(function (submit) {
-            if (!window.confirm('Are you sure you want to remove this hours change?')) {
-                submit.preventDefault();
-            }
-        });
-    });
-});]) %>
+<% append_script_declaration(%q[
+document.addEventListener('submit', (submit_event) => {
+    const delete_hours_button = submit_event.target.closest('.delete-space-hour');
+    if (delete_hours_button !== null) {
+        if (!window.confirm('Are you sure you want to remove this hours change?')) {
+            submit_event.preventDefault();
+        }
+    }
+});
+]) %>

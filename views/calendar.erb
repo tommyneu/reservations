@@ -171,12 +171,13 @@ end %>
 	<% end %>
 </div>
 
-<% append_script_declaration(%q[require(['jquery'], function ($) {
-	var max_z = 5;
-	$(document).ready(function () {
-		$('.event').click(function (click) {
-			$(this).css('z-index', max_z);
+<% append_script_declaration(%q[
+	let max_z = 5;
+	document.addEventListener('click', (click_event) => {
+		const event_element = click_event.target.closest('.event');
+		if (event_element !== null) {
+			event_element.style.zIndex = max_z;
 			max_z += 1;
-		});
+		}
 	});
-});]) %>
+]) %>

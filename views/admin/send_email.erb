@@ -121,55 +121,57 @@
 
 <% append_script_tag('/js/lib/ckeditor/ckeditor.js') %>
 
-<% append_script_declaration(%q[var files = 1;
-require(['jquery'], function ($) {
-	$(document).ready(function () {
-		$('#specific-user').change(function (change) {
-			$('#send-to-specific-user').attr('checked', true);
-		});
+<% append_script_module_declaration(%q[
+import $ from "/wdn/templates_6.1/js/lib/jQuery.js";
 
-		$('#add-file').click(function (click) {
-			click.preventDefault();
-			$input_div = $('#file-container').clone();
-			$input_div.removeAttr('id');
-			$input_div.find('.file-input').attr('name', 'file_' + ++files);
-			$input_div.find('.remove-file').show();
-			$('#files').append($input_div);
-		});
-
-		$('#files').on('click', '.remove-file', function (click) {
-			click.preventDefault();
-			$(this).closest('.file-container').remove();
-		});
-
-		// pull in the preset emails
-		let xhttp = new XMLHttpRequest();
-		let preset_emails = [];
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				preset_emails = JSON.parse(xhttp.responseText);
-			}
-		};
-		xhttp.open("GET", "/admin/email/preset_emails_json/?", true);
-		xhttp.send();
-
-		// autofill the preset email's subject and body when selected
-		$('#preset-email').change(function() {
-			let preset_id = $('#preset-email').val();
-			if (preset_id > 0) {
-				preset_emails.every(obj => {
-					if (obj.id == preset_id) {
-						$('#subject').val(obj.subject);
-						// need to test emails on staging and make sure the emails send correctly after replacing \n with <br>
-						CKEDITOR.instances["body"].setData(obj.body.replace("\\n", "<br>"));
-						return false;
-					}
-					return true;
-				});
-			} else {
-				$('#subject').val("");
-				CKEDITOR.instances["body"].setData("");
-			}
-		});
+var files = 1;
+$(document).ready(function () {
+	$('#specific-user').change(function (change) {
+		$('#send-to-specific-user').attr('checked', true);
 	});
-});]) %>
+
+	$('#add-file').click(function (click) {
+		click.preventDefault();
+		let input_div = $('#file-container').clone();
+		input_div.removeAttr('id');
+		input_div.find('.file-input').attr('name', 'file_' + ++files);
+		input_div.find('.remove-file').show();
+		$('#files').append(input_div);
+	});
+
+	$('#files').on('click', '.remove-file', function (click) {
+		click.preventDefault();
+		$(this).closest('.file-container').remove();
+	});
+
+	// pull in the preset emails
+	let xhttp = new XMLHttpRequest();
+	let preset_emails = [];
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			preset_emails = JSON.parse(xhttp.responseText);
+		}
+	};
+	xhttp.open("GET", "/admin/email/preset_emails_json/?", true);
+	xhttp.send();
+
+	// autofill the preset email's subject and body when selected
+	$('#preset-email').change(function() {
+		let preset_id = $('#preset-email').val();
+		if (preset_id > 0) {
+			preset_emails.every(obj => {
+				if (obj.id == preset_id) {
+					$('#subject').val(obj.subject);
+					// need to test emails on staging and make sure the emails send correctly after replacing \n with <br>
+					CKEDITOR.instances["body"].setData(obj.body.replace("\\n", "<br>"));
+					return false;
+				}
+				return true;
+			});
+		} else {
+			$('#subject').val("");
+			CKEDITOR.instances["body"].setData("");
+		}
+	});
+});
+]) %>

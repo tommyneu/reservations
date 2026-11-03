@@ -236,15 +236,16 @@
         </a>
     <% end %>
 
-    <% append_script_declaration(%q[require(['jquery'], function($) {
-        $(document).ready(function() {
-            $('.delete-vehicle').submit(function (submit) {
-                if (!window.confirm('Are you sure you want to delete this vehicle?')) {
-                    submit.preventDefault();
-                }
-            });
-        });
-    });]) %>
+    <% append_script_declaration(%q[
+    document.addEventListener('submit', (submit_event) => {
+		const delete_vehicle_button = submit_event.target.closest('.delete-vehicle');
+		if (delete_vehicle_button !== null) {
+			if (!window.confirm('Are you sure you want to delete this vehicle?')) {
+                submit_event.preventDefault();
+            }
+		}
+	});
+    ]) %>
 <% end %>
 
 <% append_script_declaration(%q[

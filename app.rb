@@ -92,6 +92,10 @@ def append_script_declaration(content)
     @inline_body_script_content <<  "<script>#{content}</script>\n"
 end
 
+def append_script_module_declaration(content)
+    @inline_body_script_content <<  "<script type='module'>#{content}</script>\n"
+end
+
 def has_permission?(permission)
     !@user.nil? && @user.has_permission?(permission)
 end

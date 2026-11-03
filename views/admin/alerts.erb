@@ -38,12 +38,13 @@
         </tbody>
     </table>
 <% end %>
-<% append_script_declaration(%q[require(['jquery'], function($) {
-    $(document).ready(function() {
-        $('.delete-alert').submit(function (submit) {
-            if (!window.confirm('Are you sure you want to delete this alert?')) {
-                submit.preventDefault();
-            }
-        });
-    });
-});]) %>
+<% append_script_declaration(%q[
+document.addEventListener('submit', (submit_event) => {
+    const delete_alert_button = submit_event.target.closest('.delete-alert');
+    if (delete_alert_button !== null) {
+        if (!window.confirm('Are you sure you want to delete this alert?')) {
+            submit_event.preventDefault();
+        }
+    }
+});
+]) %>

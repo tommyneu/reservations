@@ -39,13 +39,13 @@
     <% end %>
 </section>
 
-<% append_script_declaration(%q[require(['jquery'], function($) {
-
-    $(document).ready(function() {
-        $('.delete-preset').submit(function (submit) {
-            if (!window.confirm('Are you sure you want to delete this preset?')) {
-                submit.preventDefault();
-            }
-        });
-    });
-});]) %>
+<% append_script_declaration(%q[
+document.addEventListener('submit', (submit_event) => {
+    const delete_preset_button = submit_event.target.closest('.delete-preset');
+    if (delete_preset_button !== null) {
+        if (!window.confirm('Are you sure you want to delete this preset?')) {
+            submit_event.preventDefault();
+        }
+    }
+});
+]) %>

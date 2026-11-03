@@ -150,99 +150,100 @@
     <% end %>
 <% end %>
 
-<% append_script_declaration(%q[require(['jquery'], function($) {
+<% append_script_module_declaration(%q[
+import $ from "/wdn/templates_6.1/js/lib/jQuery.js";
 
-    function buildSearchFilterList() {
-         let search = [];
-         if ($('#hidden-first-name').val() != '') {
-             search.push('first_name=' + $('#hidden-first-name').val());
-         }
-         if ($('#hidden-last-name').val() != '') {
-             search.push('last_name=' + $('#hidden-last-name').val());
-         }
-         if ($('#hidden-email').val() != '') {
-             search.push('email=' + $('#hidden-email').val());
-         }
-         if ($('#hidden-expiration-date').val() != '') {
-             search.push('expiration_date=' + $('#hidden-expiration-date').val());
-         }
-         if ($('#hidden-expiration-date-operation').val() != '') {
-             search.push('expiration_date_operation=' + $('#hidden-expiration-date-operation').val());
-         }
-         if ($('#hidden-studio-status').val() != '') {
-             search.push('studio_status=' + $('#hidden-studio-status').val());
-         }
-         return search;
-     }
-
-     function sort(email,name,expiration_date) {
-        // in case we have search filters we need to preserve these
-        let search = buildSearchFilterList();
-        let new_url = "?";
-        if (name){
-            if ($('#sort-by-name').val() == "desc"){
-                new_url += "sort_by_name=asc";
-            } else {
-                new_url += "sort_by_name=desc";
-            }
-        } else if(email){
-            if ($('#sort-by-email').val() == "asc"){
-                new_url += "sort_by_email=desc";
-            } else {
-                new_url += "sort_by_email=asc";
-            }
-        } else{
-            if ($('#sort-by-expiration').val() == "asc"){
-                new_url += "sort_by_expiration=desc";
-            } else {
-                new_url += "sort_by_expiration=asc";
-            }
+function buildSearchFilterList() {
+        let search = [];
+        if ($('#hidden-first-name').val() != '') {
+            search.push('first_name=' + $('#hidden-first-name').val());
         }
-        
-        if (search.length > 0) {
-            new_url += "&" + search.join('&');
+        if ($('#hidden-last-name').val() != '') {
+            search.push('last_name=' + $('#hidden-last-name').val());
         }
-        
-        window.location = new_url;
-     }
+        if ($('#hidden-email').val() != '') {
+            search.push('email=' + $('#hidden-email').val());
+        }
+        if ($('#hidden-expiration-date').val() != '') {
+            search.push('expiration_date=' + $('#hidden-expiration-date').val());
+        }
+        if ($('#hidden-expiration-date-operation').val() != '') {
+            search.push('expiration_date_operation=' + $('#hidden-expiration-date-operation').val());
+        }
+        if ($('#hidden-studio-status').val() != '') {
+            search.push('studio_status=' + $('#hidden-studio-status').val());
+        }
+        return search;
+    }
 
-    $(document).ready(function() {
-        $('.delete-user').submit(function (submit) {
-            if (!window.confirm('Are you sure you want to delete this user?')) {
-                submit.preventDefault();
-            }
-        });
-        $('#show-toolbox').click(function (click) {
-            click.preventDefault();
-            $('#show-toolbox').hide();
-            $('#toolbox').slideDown();
-        });
-        $('#hide-toolbox').click(function (click) {
-            click.preventDefault();
-            $('#toolbox').slideUp(400, function () {
-                $('#show-toolbox').show();
-            });
-        });
+    function sort(email,name,expiration_date) {
+    // in case we have search filters we need to preserve these
+    let search = buildSearchFilterList();
+    let new_url = "?";
+    if (name){
+        if ($('#sort-by-name').val() == "desc"){
+            new_url += "sort_by_name=asc";
+        } else {
+            new_url += "sort_by_name=desc";
+        }
+    } else if(email){
+        if ($('#sort-by-email').val() == "asc"){
+            new_url += "sort_by_email=desc";
+        } else {
+            new_url += "sort_by_email=asc";
+        }
+    } else{
+        if ($('#sort-by-expiration').val() == "asc"){
+            new_url += "sort_by_expiration=desc";
+        } else {
+            new_url += "sort_by_expiration=asc";
+        }
+    }
+    
+    if (search.length > 0) {
+        new_url += "&" + search.join('&');
+    }
+    
+    window.location = new_url;
+    }
 
-        // submit search form when "enter" is pressed
-        $('#find-controls').keypress(function(e) {
-            if (e.which === 13) {
-                e.preventDefault();
-                $('#find-controls').submit();
-            }
-        });
-
-        $('#sort-by-expiration-btn').click(function() {
-            sort(false,false,true);
-        });
-        $('#sort-by-email-btn').click(function() {
-            sort(true,false,false);
-        });
-        $('#sort-by-name-btn').click(function() {
-            sort(false,true,false);
+$(document).ready(function() {
+    $('.delete-user').submit(function (submit) {
+        if (!window.confirm('Are you sure you want to delete this user?')) {
+            submit.preventDefault();
+        }
+    });
+    $('#show-toolbox').click(function (click) {
+        click.preventDefault();
+        $('#show-toolbox').hide();
+        $('#toolbox').slideDown();
+    });
+    $('#hide-toolbox').click(function (click) {
+        click.preventDefault();
+        $('#toolbox').slideUp(400, function () {
+            $('#show-toolbox').show();
         });
     });
-});]) %>
+
+    // submit search form when "enter" is pressed
+    $('#find-controls').keypress(function(e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            $('#find-controls').submit();
+        }
+    });
+
+    $('#sort-by-expiration-btn').click(function() {
+        sort(false,false,true);
+    });
+    $('#sort-by-email-btn').click(function() {
+        sort(true,false,false);
+    });
+    $('#sort-by-name-btn').click(function() {
+        sort(false,true,false);
+    });
+});
+]) %>
 
 <% if has_permission?(Permission::VIEW_USER_PERMISSIONS_READ_ONLY) %>
     <% append_script_declaration(%q[
