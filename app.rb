@@ -32,6 +32,7 @@ SS_ID = ServiceSpace.where(:id => CONFIG['app']['service_space_id']).first.id
 
 before do
     # site defaults
+    @inline_head_style_content = ''
     @inline_body_script_content = ''
     @affiliation = 'Nebraska Innovation Campus'
     @affiliation_link = 'https://innovate.unl.edu/'
@@ -53,6 +54,7 @@ before do
     ]
 
     if SS_ID == 8
+      @inline_head_style_content = ''
       @inline_body_script_content = ''
       @affiliation = 'College of Engineering'
       @affiliation_link = 'https://engineering.unl.edu/'
@@ -82,6 +84,10 @@ before do
     else
         @user = nil;
     end
+end
+
+def append_style_tag(src)
+    @inline_head_style_content <<  "<link rel=\"stylesheet\" href=\"#{src}\">\n"
 end
 
 def append_script_tag(src)
