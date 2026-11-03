@@ -1,8 +1,11 @@
 require 'models/user'
 require 'models/vehicle'
 
-get '/vehicle/add/?' do
+before '/vehicle*' do
   require_login
+end
+
+get '/vehicle/add/?' do
   @breadcrumbs << {:text => 'My Account', :href => '/me/'} << {text: 'Add Vehicle'}
   	if params[:user_id].present? && !(has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER))
         raise Sinatra::NotFound
@@ -15,7 +18,6 @@ get '/vehicle/add/?' do
 end
 
 get '/vehicle/:vehicle_id/edit/?' do
-    require_login
     @breadcrumbs << {:text => 'My Account', :href => '/me/'} << {text: 'Edit Vehicle'}
 	if params[:user_id].present? && !(has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER))
         raise Sinatra::NotFound
@@ -37,8 +39,6 @@ get '/vehicle/:vehicle_id/edit/?' do
   end
 
 post '/vehicle/:vehicle_id/edit/?' do
-	require_login
-
 	license_plate = params[:license_plate]
 	state = params[:state]
 	make = params[:make]
@@ -53,6 +53,12 @@ post '/vehicle/:vehicle_id/edit/?' do
 			redirect '/me/'
 		end
 	end
+
+	# Check if user is editor own record or the user is an admin/super user
+	owns_record = vehicle && vehicle.user_id == @user.id
+	acts_for_other = params[:user_id].present?
+	elevated = has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER)
+	halt 403 unless (owns_record && !acts_for_other) || elevated
 
 	if license_plate.blank? || state.blank? || make.blank? || model.blank?
 		flash(:error, 'Vehicle Update Failed', "Please fill out all required fields.")
@@ -98,7 +104,11 @@ end
 
 
 post '/vehicle/add/?' do
-	require_login
+
+	# Check if user is making a vehicle for themselves or they are an admin/super user
+	acts_for_other = params[:user_id].present?
+	elevated = has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER)
+	halt 403 unless (!acts_for_other) || elevated
 
     vehicle = Vehicle.new
 	license_plate = params[:license_plate]
@@ -149,9 +159,14 @@ post '/vehicle/add/?' do
 end
 
 post '/vehicle/:vehicle_id/delete/?' do
-	require_login
-
 	vehicle = Vehicle.find_by(:id => params[:vehicle_id])
+
+	# Check if user is editor own record or the user is an admin/super user
+	owns_record = vehicle && vehicle.user_id == @user.id
+	acts_for_other = params[:user_id].present?
+	elevated = has_permission?(Permission::MANAGE_USERS) || has_permission?(Permission::SUPER_USER)
+	halt 403 unless (owns_record && !acts_for_other) || elevated
+
 	if vehicle.nil?
 		# that vehicle does not exist
 		flash(:danger, 'Not Found', 'That vehicle does not exist')
