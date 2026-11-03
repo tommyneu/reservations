@@ -141,18 +141,16 @@
                                     </td>
                                     <td>
                                     <% unless event.admin_notes.nil? %>
-                                    <button class="dcf-mt-1 dcf-btn dcf-btn-secondary dcf-btn-toggle-modal" data-toggles-modal="admin-notes-modal-<%= event.id %>" type="button">Notes</button>
-                                    <div class="dcf-modal" id="admin-notes-modal-<%= event.id %>" hidden>
-                                        <div class="dcf-modal-wrapper">
-                                            <div class="dcf-modal-header">
-                                                <h3>Admin Notes for <%= event.title %></h3>
-                                                <button class="dcf-btn-close-modal">Close</button>
-                                            </div>
-                                            <div class="dcf-modal-content">
-                                                <pre><%= event.admin_notes %></pre>
-                                            </div>
+                                    <button class="dcf-mt-1 dcf-btn dcf-btn-secondary dcf-btn-toggle-dialog" data-controls="admin-notes-modal-<%= event.id %>" type="button">Notes</button>
+                                    <dialog class="dcf-dialog" id="admin-notes-modal-<%= event.id %>" hidden>
+                                        <div class="dcf-dialog-header">
+                                            <h3>Admin Notes for <%= event.title %></h3>
+                                            <button class="dcf-btn-close-dialog">Close</button>
                                         </div>
-                                    </div>
+                                        <div class="dcf-dialog-content">
+                                            <pre><%= event.admin_notes %></pre>
+                                        </div>
+                                    </dialog>
                                     <% end %>
                                     <% if has_permission?(Permission::MANAGE_EVENTS) %>
                                     <form class="dcf-form delete-event delete-form" action="/admin/events/<%=event.id%>/delete/" method="POST">

@@ -60,27 +60,25 @@
 										<% end %>
 									<% end %>
 									<td class="dcf-d-flex dcf-flex-row-rev dcf-flex-shrink-1 dcf-gap-2">
-										<button class="dcf-btn-toggle-modal dcf-btn dcf-btn-secondary" data-toggles-modal="delete-<%= project[:id] %>" type="button">Delete</button>
-										<div class="dcf-modal" id="delete-<%= project[:id] %>" hidden>
-											<div class="dcf-modal-wrapper">
-												<div class="dcf-modal-header">
-													<h3>Delete Project</h3>
-													<button class="dcf-btn-close-modal">Close</button>
-												</div>
-												<div class="dcf-modal-content">
-													<form class="dcf-form dcf-d-grid dcf-grid-cols-2" action="/checkout/project_delete/?bin_id=<%= project[:bin_id] %>" method="POST" enctype="application/x-www-form-urlencoded">
-														<div>
-															<p id="project_name"><strong>Name:</strong> <%= project[:title] %></p>
-															<p id="bin_id"><strong>Location:</strong> <%= project[:bin_id] %></p>
-															<p><strong>Description:</strong> <%= project[:description] %></p>
-															<div class="dcf-form-controls-inline dcf-gap-2">
-																<button class="dcf-btn dcf-btn-secondary" type="submit">Delete</button>
-															</div>
-														</div>
-													</form>
-												</div>
+										<button class="dcf-btn-toggle-dialog dcf-btn dcf-btn-secondary" data-controls="delete-<%= project[:id] %>" type="button">Delete</button>
+										<dialog class="dcf-dialog" id="delete-<%= project[:id] %>" hidden>
+											<div class="dcf-dialog-header">
+												<h3>Delete Project</h3>
+												<button class="dcf-btn-close-dialog">Close</button>
 											</div>
-										</div>
+											<div class="dcf-dialog-content">
+												<form class="dcf-form dcf-d-grid dcf-grid-cols-2" action="/checkout/project_delete/?bin_id=<%= project[:bin_id] %>" method="POST" enctype="application/x-www-form-urlencoded">
+													<div>
+														<p id="project_name"><strong>Name:</strong> <%= project[:title] %></p>
+														<p id="bin_id"><strong>Location:</strong> <%= project[:bin_id] %></p>
+														<p><strong>Description:</strong> <%= project[:description] %></p>
+														<div class="dcf-form-controls-inline dcf-gap-2">
+															<button class="dcf-btn dcf-btn-secondary" type="submit">Delete</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</dialog>
 										<a href="/checkout/project/edit/?project_id=<%= project[:id] %>&returning_to_warehouse=true" class="dcf-btn dcf-btn-primary">Edit</a>
 									</td>
 								</tr>
@@ -134,33 +132,31 @@
 									</td>
 									<td><%= tool[:last_checked_out].in_time_zone.strftime("%b %-d, %Y %-I:%M%P") %></td>
 									<td class="table-actions">
-										<button class="dcf-btn-toggle-modal dcf-btn dcf-btn-primary" data-toggles-modal="checkin-tool-<%= tool[:id] %>" type="button">Check In</button>
-										<div class="dcf-modal" id="checkin-tool-<%= tool[:id] %>" hidden>
-											<div class="dcf-modal-wrapper">
-												<div class="dcf-modal-header">
+										<button class="dcf-btn-toggle-dialog dcf-btn dcf-btn-primary" data-controls="checkin-tool-<%= tool[:id] %>" type="button">Check In</button>
+										<dialog class="dcf-dialog" id="checkin-tool-<%= tool[:id] %>" hidden>
+											<div class="dcf-dialog-header">
 												<h3>Check In Tool</h3>
-													<button class="dcf-btn-close-modal">Close</button>
-												</div>
-												<div class="dcf-modal-content">
+												<button class="dcf-btn-close-dialog">Close</button>
+											</div>
+											<div class="dcf-dialog-content">
 												<form class="dcf-form dcf-d-grid dcf-grid-cols-1 dcf-grid-cols-2@md" action="/checkout/tool_checkin/?tool_id=<%= tool[:id] %>" method="POST" enctype="application/x-www-form-urlencoded">
-												<div>
-													<p id="tool_name_<%= tool[:id]%>"><strong>Name:</strong> <%= tool[:tool_name] %></p>
-													<p id="serial_number_<%= tool[:id]%>"><strong>Serial Number:</strong> <%= tool[:serial_number] %></p>
-													<p id="model_number_<%= tool[:id]%>"><strong>Model Number:</strong> <%= tool[:model_number] %></p>
-													<div class="dcf-form-controls-inline dcf-gap-2">
-														<button class="dcf-btn dcf-btn-primary" type="submit">Check In</button>
+													<div>
+														<p id="tool_name_<%= tool[:id]%>"><strong>Name:</strong> <%= tool[:tool_name] %></p>
+														<p id="serial_number_<%= tool[:id]%>"><strong>Serial Number:</strong> <%= tool[:serial_number] %></p>
+														<p id="model_number_<%= tool[:id]%>"><strong>Model Number:</strong> <%= tool[:model_number] %></p>
+														<div class="dcf-form-controls-inline dcf-gap-2">
+															<button class="dcf-btn dcf-btn-primary" type="submit">Check In</button>
+														</div>
 													</div>
-												</div>
-												<div class="dcf-overflow-y-auto" style = "max-height: 30rem;">
-													<fieldset>
-														<legend><strong>Description:</strong></legend>
-														<p><%= tool[:description] %></p>
-													</fieldset>
-												</div>
-											</form>
-												</div>
+													<div class="dcf-overflow-y-auto" style = "max-height: 30rem;">
+														<fieldset>
+															<legend><strong>Description:</strong></legend>
+															<p><%= tool[:description] %></p>
+														</fieldset>
+													</div>
+												</form>
 											</div>
-											</div>
+										</dialog>
 									</td>
 								</tr>
 							<% end %>

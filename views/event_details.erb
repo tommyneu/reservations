@@ -1,32 +1,30 @@
-<div class="dcf-modal" id="enter-code-modal" hidden>
-  <div class="dcf-modal-wrapper">
-    <div class="dcf-modal-header">
-      <h2>Code Required</h2>
-      <button class="dcf-btn-close-modal">Close</button>
-    </div>
-    <div class="dcf-modal-content">
-        <p>To sign up for this event, please enter the code that you received from the NIS administrators.
+<dialog class="dcf-dialog" id="enter-code-modal" hidden>
+	<div class="dcf-dialog-header">
+		<h2>Code Required</h2>
+		<button class="dcf-btn-close-dialog">Close</button>
+	</div>
+	<div class="dcf-dialog-content">
+		<p>To sign up for this event, please enter the code that you received from the NIS administrators.
 
-        <form class="dcf-form inline-form" id="signup-with-code-form" action="" method="POST">
-            <div class="dcf-form-group">
-                <label for="event_code">Event Signup Code:</label>
-                <input type="text" id="event_code" name="event_code" >
-            </div>
+		<form class="dcf-form inline-form" id="signup-with-code-form" action="" method="POST">
+			<div class="dcf-form-group">
+				<label for="event_code">Event Signup Code:</label>
+				<input type="text" id="event_code" name="event_code" >
+			</div>
 			<% unless @user %>
 			<div class="dcf-form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" >
-            </div>
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" >
+			</div>
 			<div class="dcf-form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" >
-            </div>
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" >
+			</div>
 			<% end %>
-            <button type="submit" class="dcf-btn dcf-btn-primary">Sign Up!</button>
-        </form>
-    </div>
-  </div>
-</div>
+			<button type="submit" class="dcf-btn dcf-btn-primary">Sign Up!</button>
+		</form>
+	</div>
+</dialog>
 
 <div class="event-details dcf-p-4">
 	<div class="dcf-d-flex dcf-flex-row dcf-jc-between dcf-ai-center dcf-mb-4">
@@ -92,7 +90,7 @@
 			Please read details above on how to signup for this event.
 		<% elsif event.max_signups.nil? || event.signups.count < event.max_signups %>
 			<form class="dcf-form" action="/events/<%= event.id %>/sign_up/" method="POST">
-			<button type="submit" <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up/', event);" data-toggles-modal="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-modal">
+			<button type="submit" <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up/', event);" data-controls="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog">
 				<% if event.free_event_type? %>
 					Note event on my homepage
 				<% else %>
@@ -111,7 +109,7 @@
 			<% if !event.signup_allowed_for_type? %>
 				Please read details above on how to signup for this event.
 			<% elsif event.max_signups.nil? || event.signups.count < event.max_signups %>
-				<a <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up_as_non_member/', event);" data-toggles-modal="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-modal" href="/events/<%= event.id %>/sign_up_as_non_member/">Sign up for this event</a>
+				<a <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up_as_non_member/', event);" data-controls="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog" href="/events/<%= event.id %>/sign_up_as_non_member/">Sign up for this event</a>
 			<% else %>
 				All slots for this event are filled.
 			<% end %>

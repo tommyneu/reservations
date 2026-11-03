@@ -1,10 +1,9 @@
-<div class="dcf-modal" id="enter-code-modal-<%= id || "none" %>" hidden>
-  <div class="dcf-modal-wrapper">
-    <div class="dcf-modal-header">
-      <h2>Code Required</h2>
-      <button class="dcf-btn-close-modal">Close</button>
+<dialog class="dcf-dialog" id="enter-code-modal-<%= id || "none" %>" hidden>
+    <div class="dcf-dialog-header">
+        <h2>Code Required</h2>
+        <button class="dcf-btn-close-dialog">Close</button>
     </div>
-    <div class="dcf-modal-content">
+    <div class="dcf-dialog-content">
         <p>To sign up for this event, please enter the code that you received from event organizer.
 
         <form class="dcf-form inline-form" id="signup-with-code-form-<%= id || "none" %>" action="" method="POST">
@@ -15,8 +14,7 @@
             <button type="submit" class="dcf-btn dcf-btn-primary">Sign Up!</button>
         </form>
     </div>
-  </div>
-</div>
+</dialog>
 
 <table class="dcf-table dcf-table-striped dcf-table-responsive dcf-mb-6">
     <thead>
@@ -47,11 +45,11 @@
                     <a href="<%= event.info_link %>">View for details on how to signup.</a>
                 <% elsif event.machine_training_event_type? %>
                     <form class="dcf-form inline-form" action="/tools/trainings/sign_up/<%= event.id %>/" method="POST">                                                         
-                        <button type="submit" <% if event.event_code.present? %> onclick="promptCode('/tools/trainings/sign_up/<%= event.id %>/', <%= id || "none" %>, event);" data-toggles-modal="enter-code-modal-<%= id || "none" %>" <% end %>  class="dcf-btn dcf-btn-primary dcf-btn-toggle-modal" href="/tools/trainings/sign_up/<%= event.id %>/">Sign Up!</button>
+                        <button type="submit" <% if event.event_code.present? %> onclick="promptCode('/tools/trainings/sign_up/<%= event.id %>/', <%= id || "none" %>, event);" data-controls="enter-code-modal-<%= id || "none" %>" <% end %>  class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog" href="/tools/trainings/sign_up/<%= event.id %>/">Sign Up!</button>
                     </form>
                 <% else %>
                     <form class="dcf-form inline-form" action="/workshops/sign_up/<%= event.id %>/" method="POST">
-                        <button type="submit" <% if event.event_code.present? %> onclick="promptCode('/workshops/sign_up/<%= event.id %>/', <%= id || "none" %>, event);" data-toggles-modal="enter-code-modal-<%= id || "none" %>" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-modal" href="/workshops/sign_up/<%= event.id %>/">Sign Up!</button>
+                        <button type="submit" <% if event.event_code.present? %> onclick="promptCode('/workshops/sign_up/<%= event.id %>/', <%= id || "none" %>, event);" data-controls="enter-code-modal-<%= id || "none" %>" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog" href="/workshops/sign_up/<%= event.id %>/">Sign Up!</button>
                     </form>
                 <% end %>
                 </td>
