@@ -140,7 +140,7 @@ post '/admin/events/:event_id/signup_list/?' do
 						signup_record.save
 					end
 
-          if event.start_time == nil && SS_ID == 8
+          if event.start_time == nil
             end_time = Time.now
           else 
             end_time = event.end_time
@@ -338,6 +338,8 @@ post '/admin/events/create/?' do
 		params[:location] = location.id
 	end
 
+	redirect_url = '/admin/events/'
+
 	if params[:timeless_event_checkbox] != "on"
 		params[:start_date].keys.each do |date_key|
 			begin
@@ -368,12 +370,15 @@ post '/admin/events/create/?' do
 		event.set_data(params, {})
 
 		set_up_event(params, event)
+
+		# notify that it worked
+		redirect_url = '/admin/events/?tab=timeless'
 	end
 
 
 	# notify that it worked
 	flash(:success, 'Event Created', "Your #{params[:description]}: #{params[:title]} has been created.")
-	redirect '/admin/events/'
+	redirect redirect_url
 end
 
 def set_up_event(params, event)

@@ -218,12 +218,10 @@
                 <legend>Occurrences</legend>
 
                 <div class="dcf-w-100% dcf-d-flex dcf-jc-between dcf-ai-center dcf-mb-3">
-                    <% if SS_ID == 8 %>
-                        <div class="dcf-input-checkbox" >
-                            <input type="checkbox" <%= 'checked="checked"' if event.start_time == nil && event.title != nil %> id="timeless_event_checkbox" name="timeless_event_checkbox">
-                            <label for="timeless_event_checkbox">Timeless event</label>
-                        </div>
-                    <% end %>
+                    <div class="dcf-input-checkbox" >
+                        <input type="checkbox" <%= 'checked="checked"' if event.start_time == nil && event.title != nil %> id="timeless_event_checkbox" name="timeless_event_checkbox">
+                        <label for="timeless_event_checkbox">Timeless event</label>
+                    </div>
                     <div>
                         <button
                             id="add_new_occurrence"

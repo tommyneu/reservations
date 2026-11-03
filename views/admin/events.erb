@@ -29,9 +29,7 @@
         <ol class="dcf-tabs-list dcf-list-bare dcf-mb-0" role="tablist">
             <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-upcoming" href="?tab=upcoming" class="dcf-tab dcf-d-block" role="tab" <%='tabindex="-1" aria-selected="true"' if tab == 'upcoming' %>>Upcoming</a></li>
             <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-past" href="?tab=past" class="dcf-tab dcf-d-block" role="tab" <%='tabindex="-1" aria-selected="true"' if tab == 'past' %>>Past</a></li>
-            <% if SS_ID == 8 %>
-                <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-timeless" href="?tab=timeless" class="dcf-tab dcf-d-block" role="tab" <%='tabindex="-1" aria-selected="true"' if tab == 'timeless' %>>Timeless</a></li>
-            <% end %>
+            <li class="dcf-tabs-list-item dcf-mb-0" role="presentation"><a id="tab-timeless" href="?tab=timeless" class="dcf-tab dcf-d-block" role="tab" <%='tabindex="-1" aria-selected="true"' if tab == 'timeless' %>>Timeless</a></li>
         </ol>
             <section id="status-<%= tab %>" role="tabpanel" tabindex="-1" class="dcf-tabs-panel" aria-labelledby="tab-<%= tab %>">
                 <div class="event-page">
