@@ -1,4 +1,10 @@
-<h1 class="dcf-txt-h4" id="signup-list-header">Signup List for <%= event.title %> Event</h1>
+<h1 class="dcf-txt-h4" id="signup-list-header">Signup List for <em><%= event.title %></em></h1>
+
+<% if event.max_signups %>
+    <p>
+    <%= event.signups.length %> Filled of <%= event.max_signups %> Total Slots
+    </p>
+<% end %>
 
 <form class="dcf-form" id="attendance" action="" method="POST">
     <table class="dcf-w-100% dcf-table dcf-table-bordered">
@@ -41,5 +47,35 @@
         </tbody>
     </table>
     <br>
-    <button class="dcf-btn dcf-btn-primary" type="submit">Save Signup List</button>
+
+    <div class="dcf-form-group">
+        <label for="add-user">Add User(s): <em>(use Ctrl/Cmd to select multiple)</em></label>
+        <select class="dcf-txt-sm" multiple="multiple" size="8" id="add-user" name="add_user[]" >
+            <% users.sort{|x,y| x.sortable_name.downcase <=> y.sortable_name.downcase}.each do |user| %>
+            <option value="<%= user.id %>"><%= user.sortable_name %> (<%= user.email %>) (User #<%= user.id %>)</option>
+            <% end %>
+        </select>
+    </div>
+    <br>
+
+    <fieldset>
+        <legend class="dcf-legend">Sign up a non-member</legend>
+        <p class="dcf-txt-xs">
+          Check first if the person is available in the <em>Add User</em> select above.
+          Adding a person here does <em>not</em> create a user account for them.
+        </p>
+        <div class="dcf-form-controls-inline">
+            <div class="dcf-form-group dcf-mr-3">
+                <label for="signup_name">Name</em></label>
+                <input id="signup-name" name="signup_name">
+            </div>
+            <div class="dcf-form-group">
+                <label for="signup_email">Email</em></label>
+                <input id="signup-email" name="signup_email">
+            </div>
+        </div>
+    </fieldset>
+    <br>
+
+    <button class="dcf-btn dcf-btn-primary" type="submit">Save</button>
 </form>

@@ -66,8 +66,8 @@
 		</div>
 		<% end %>
 		<div class="description">
-	    	<%= event.description.nl2br.force_encoding("UTF-8") %>
-	    </div>
+			<%= event.description.nl2br.force_encoding("UTF-8") %>
+		</div>
 	</div>
 </div>
 
@@ -90,13 +90,13 @@
 			Please read details above on how to signup for this event.
 		<% elsif event.max_signups.nil? || event.signups.count < event.max_signups %>
 			<form class="dcf-form" action="/events/<%= event.id %>/sign_up/" method="POST">
-			<button type="submit" <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up/', event);" data-controls="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog">
-				<% if event.free_event_type? %>
-					Note event on my homepage
-				<% else %>
-					Sign up for this event
-				<% end %>
-			</a>
+				<button type="submit" <% if event.event_code.present? %> onclick="promptCode('/events/<%= event.id %>/sign_up/', event);" data-controls="enter-code-modal" <% end %> class="dcf-btn dcf-btn-primary dcf-btn-toggle-dialog">
+					<% if event.free_event_type? %>
+						Note event on my homepage
+					<% else %>
+						Sign up for this event
+					<% end %>
+				</button>
 			</form>
 		<% else %>
 			All slots for this event are filled.
@@ -118,8 +118,8 @@
 <% end %>
 
 <script>
-    function promptCode(signupLink, event) {
-        event.preventDefault();
-        document.getElementById('signup-with-code-form').setAttribute('action', signupLink);
-    }
+	function promptCode(signupLink, event) {
+		event.preventDefault();
+		document.getElementById('signup-with-code-form').setAttribute('action', signupLink);
+	}
 </script>

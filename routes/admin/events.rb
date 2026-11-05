@@ -16,9 +16,9 @@ before '/admin/events*' do
 end
 
 before '/admin/events/:event_id/(create|edit|delete)*?' do
-    unless has_permission?(Permission::MANAGE_EVENTS)
-        raise Sinatra::NotFound
-    end
+	unless has_permission?(Permission::MANAGE_EVENTS)
+		raise Sinatra::NotFound
+	end
 end
 
 get '/admin/events/?' do
@@ -85,6 +85,7 @@ end
 get '/admin/events/:event_id/signup_list/?' do
 	@breadcrumbs << {:text => 'Admin Events', :href => '/admin/events/'} << {text: 'Signup List'}
 	event = Event.includes(:event_signups).find_by(:id => params[:event_id], :service_space_id => SS_ID)
+	users = User.where(:service_space_id => SS_ID).all
 	if event.nil?
 		# that event does not exist
 		flash(:danger, 'Not Found', 'That event does not exist')
@@ -93,7 +94,8 @@ get '/admin/events/:event_id/signup_list/?' do
 
 	erb :'admin/signup_list', :layout => :fixed_61, :locals => {
 		:event => event,
-		:event_type_id => event.event_type_id
+		:event_type_id => event.event_type_id,
+		:users => users,
 	}
 end
 
@@ -140,11 +142,11 @@ post '/admin/events/:event_id/signup_list/?' do
 						signup_record.save
 					end
 
-          if event.start_time == nil
-            end_time = Time.now
-          else 
-            end_time = event.end_time
-          end
+					if event.start_time == nil
+						end_time = Time.now
+					else
+						end_time = event.end_time
+					end
 
 					if !user.nil? && event.event_type_id == new_member_orientation_id
 						# Check if user is already on list
@@ -235,8 +237,43 @@ post '/admin/events/:event_id/signup_list/?' do
 		end
 	end
 
+	# check that we're not trying to add too many new users
+	add_users = Array(params['add_user']).reject(&:empty?)
+	new_count = add_users.length
+	signup_name = params['signup_name'].to_s
+	signup_email = params['signup_email'].to_s
+	manual_signup_count = (!signup_name.empty? || !signup_email.empty?) ? 1 : 0
+
+	if !event.max_signups.nil? &&
+		event.signups.count + new_count + manual_signup_count > event.max_signups
+		flash(:danger, 'Failed', 'You are trying to add more users than available slots.')
+		redirect back
+	end
+
+	# add user(s)
+	add_users.each do |user_id|
+		user = User.find_by(id: user_id, service_space_id: SS_ID)
+		next unless user
+
+		EventSignup.create(
+			event_id: event.id,
+			name: user.full_name,
+			user_id: user.id,
+			email: user.email
+		)
+	end
+
+	# add non-member to signup
+	if !signup_name.empty? || !signup_email.empty?
+		EventSignup.create(
+			event_id: event.id,
+			name: signup_name,
+			email: signup_email
+		)
+	end
+
 	flash :success, 'Event\'s Signup List Updated', "#{event.title.rstrip}'s Signup List have been updated."
-	redirect '/admin/events/'
+	redirect back
 end
 
 def event_type_allow_signup_deletions(event_type_id)
@@ -252,7 +289,7 @@ get '/admin/events/create/?' do
 	end
 	tools = Resource.where(:service_space_id => SS_ID, :is_reservable => true).order(:name => :asc).all.to_a
 	all_tools = Resource.where(:service_space_id => SS_ID).order(:name).all.to_a
-    all_tools.sort_by! do |tool|
+	all_tools.sort_by! do |tool|
 		[
 			tool.category_name.to_s.downcase,
 			tool.name.to_s.downcase,
@@ -495,11 +532,11 @@ get '/admin/events/:event_id/edit/?' do
 		]
 	end
 	event_authorized_tools = EventAuthorization.joins(:event).where('event_id = ?', event.id)
-    authorized_tools_ids = Array.new
+	authorized_tools_ids = Array.new
 
-    event_authorized_tools.each do |tool|
-        authorized_tools_ids.append(tool.resource_id)
-    end
+	event_authorized_tools.each do |tool|
+		authorized_tools_ids.append(tool.resource_id)
+	end
 
 	if event.nil?
 		# that event does not exist
@@ -588,9 +625,9 @@ post '/admin/events/:event_id/edit/?' do
 	old_trainer_2 = User.where(:service_space_id => SS_ID).where('id = ?', event.trainer_2_id)
 	old_trainer_3 = User.where(:service_space_id => SS_ID).where('id = ?', event.trainer_3_id)
 
-    # remember original start/end times
-    original_event_start_time = event.start_time
-    original_event_end_time = event.end_time
+	# remember original start/end times
+	original_event_start_time = event.start_time
+	original_event_end_time = event.end_time
 
 	if params[:location] == 'new'
 		# this is a new location, we must create it!
@@ -724,7 +761,7 @@ def edit_up_event(params, event, original_event_start_time, original_event_end_t
 	end
 
 	delete_old_authorizations = EventAuthorization.where(event_id: event.id).all
-    delete_old_authorizations.destroy_all
+	delete_old_authorizations.destroy_all
 
 	if params.checked?('authorize_tools_checkbox') and !params[:specific_tools].nil?
 		params[:specific_tools].each do |id|
@@ -906,7 +943,7 @@ post '/admin/events/:event_id/delete/?' do
 	end
 	
 	delete_old_authorizations = EventAuthorization.where(event_id: event.id).all
-    delete_old_authorizations.destroy_all
+	delete_old_authorizations.destroy_all
 
 	event.destroy
 
@@ -1107,7 +1144,7 @@ post '/admin/events/presets/:preset_id/edit/?' do
 			end
 
 			delete_old_reservations = PresetEventsHasResourceReservation.where(preset_events_id: preset.id).all
-    		delete_old_reservations.destroy_all
+			delete_old_reservations.destroy_all
 
 			
 			# add the updated reservation tools that are checked when editing the preset event
@@ -1141,7 +1178,7 @@ post '/admin/events/presets/:preset_id/delete/?' do
 	end
 	
 	delete_reservations = PresetEventsHasResourceReservation.where(preset_events_id: preset.id).all
-    delete_reservations.destroy_all
+	delete_reservations.destroy_all
 
 	begin
 		preset.get_resource_ids.each do |resource_id|

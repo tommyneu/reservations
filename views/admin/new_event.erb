@@ -117,6 +117,12 @@
                     <label for="event-code">Require Code to Signup <small id="event-code-required" class="dcf-required">Required</small></label>
                     <input class="dcf-w-100%" type="text" id="event-code" name="event_code" value="<%= event.event_code %>"/>
                 </div>
+
+                <div id="payment_link_container" class="dcf-form-group">
+                    <label for="payment-link">Payment Link</label>
+                    <input class="dcf-w-100%" type="text" id="payment-link" name="payment_link" value="<%= event.payment_link %>"/>
+                    <span class="dcf-txt-xs">If set, users cannot sign up on this site. They will be sent to the link to pay and then upon receiving payment confirmation they need to be added manually to the signups.</span>
+                </div>
             </fieldset>
 
             <fieldset>

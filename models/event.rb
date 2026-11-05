@@ -148,6 +148,7 @@ class Event < ActiveRecord::Base
 			self.hrc_parking = 1
 		end
 		self.event_code = params[:event_code]
+		self.payment_link = params[:payment_link]
 		self.save
 	end
 

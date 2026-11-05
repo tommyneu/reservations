@@ -56,6 +56,8 @@
 							<th scope="col">Category</th>
 							<th scope="col">Tool</th>
 							<th scope="col">Model</th>
+              <th scope="col">Serial Number</th>
+							<th scope="col">Description</th>
 							<th scope="col">Status</th>
 							<th scope="col">Actions</th>
 					</tr>
@@ -72,8 +74,14 @@
 							<td>
 									<%= tool.model_number %>
 							</td>
+              <td>
+									<%= tool.serial_number %>
+							</td>
 							<td>
-								<%= tool.get_status %>
+									<%= tool.description %>
+							</td>
+							<td>
+								  <%= tool.get_status %>
 							</td>
 							<td class="table-actions">
 									<div>
